@@ -5,7 +5,7 @@
 #include "m32rotary.c"
 #include <avr/io.h>
 #include <avr/interrupt.h>
-uint8_t program_author[]   = " Jonas & Anton";
+uint8_t program_author[]   = "Jonas & Anton ";
 uint8_t program_version[]  = "LCD-AVR-4d (gcc)";
 uint8_t program_date[]     = "Sep 16, 2013";
 uint8_t program_txt[]	   = " Anton is cool";
@@ -36,6 +36,9 @@ void MainInit(void)
 	//Taimerio 2 paleidimas
 	Timer2_Start();
 	//enable global interrupts
+	DDRD = 0xf0;
+	EICRA |= (1<<ISC00);
+	EIMSK |= (1<<INT0);
 	sei();
 }
 int main(void)
@@ -78,7 +81,6 @@ int main(void)
     while(1){
 		_delay_ms(100);
 		MainScreenUpdate();
-	
 	}
     return 0;
 }
@@ -91,6 +93,11 @@ ISR(TIMER1_OVF_vect) {
 	//lcd_write_character_4d(getal);
 	//_delay_us(80);
 	TCNT1 = 40536;
+}
+
+ISR(INT1_vect)
+{
+	PORTB ^= 0x10;
 }
 /******************************* End of Main Program Code ******************/
 

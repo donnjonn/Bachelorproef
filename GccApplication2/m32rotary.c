@@ -10,8 +10,10 @@ Rotary encoder test
 //Strings in flash
 const uint8_t left_string[] = "left";
 const uint8_t right_string[] = "right";
+uint8_t counterstring[] = "";
+uint8_t counter = 0;
 
-//init timer2
+//init timer2 
 void Timer2_Init(void)
 {
 	TCNT2=0x00;
@@ -19,7 +21,7 @@ void Timer2_Init(void)
 //start timer2
 void Timer2_Start(void)
 {
-	TCCR2B|=(1<<CS22)|(1<<CS21); //prescaler 256 ~122 interrupts/s
+	TCCR2B|=(1<<CS22)|(1<<CS21)|(1<<CS20); //prescaler 256 ~122 interrupts/s
 	TIMSK2|=(1<<TOIE2);//Enable Timer0 Overflow interrupts
 }
 //timer ISR check for rotary encoder status
@@ -35,30 +37,31 @@ void MainScreenUpdate(void)
 		//update encoder status on screen
 		if (RotaryGetStatus() == 1)
 		{	
-			
-			PORTB ^=  0x10;
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
-			_delay_us(80);
+			RotaryResetStatus();
 			lcd_write_instruction_4d(lcd_Clear);
+			_delay_ms(4);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
 			_delay_us(80);
 			//ks0108DrawRoundRect(5, 20, 117, 20, 8, BLACK);
 			//ks0108GotoXY(20,25);
-			lcd_write_string_4d("left");
+			counter--;
+			itoa(counter, counterstring, 10);
+			lcd_write_string_4d(counterstring);
 			_delay_us(80);
-			RotaryResetStatus();
 		}
 		else if (RotaryGetStatus() == 2)
 		{	
-			PORTB ^=  0x10;
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
-			_delay_us(80);
+			RotaryResetStatus();
 			lcd_write_instruction_4d(lcd_Clear);
+			_delay_ms(4);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
 			_delay_us(80);
 			//ks0108DrawRoundRect(5, 20, 117, 20, 8, BLACK);
 			//ks0108GotoXY(20,25);
-			lcd_write_string_4d("right");
+			counter++;
+			itoa(counter, counterstring, 10);
+			lcd_write_string_4d(counterstring);
 			_delay_us(80);
-			RotaryResetStatus();
 		}
 }
 /*int main(void) {
