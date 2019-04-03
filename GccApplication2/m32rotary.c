@@ -12,7 +12,8 @@ const uint8_t left_string[] = "left";
 const uint8_t right_string[] = "right";
 uint8_t counterstring[] = "";
 uint8_t counter = 0;
-
+static uint8_t voristatus = 0;
+uint8_t accum2 = 0;
 //init timer2 
 void Timer2_Init(void)
 {
@@ -37,6 +38,12 @@ void MainScreenUpdate(void)
 		//update encoder status on screen
 		if (RotaryGetStatus() == 1)
 		{	
+			if(voristatus == 1){
+				accum2++;
+			}
+			else{
+				accum2==0;
+			}
 			RotaryResetStatus();
 			lcd_write_instruction_4d(lcd_Clear);
 			_delay_ms(4);
@@ -44,13 +51,20 @@ void MainScreenUpdate(void)
 			_delay_us(80);
 			//ks0108DrawRoundRect(5, 20, 117, 20, 8, BLACK);
 			//ks0108GotoXY(20,25);
-			counter--;
+			counter= counter-1-(1*accum)-(1*accum2);
 			itoa(counter, counterstring, 10);
 			lcd_write_string_4d(counterstring);
 			_delay_us(80);
+			voristatus == 1;
 		}
 		else if (RotaryGetStatus() == 2)
 		{	
+			if(voristatus == 1){
+				accum2++;
+			}
+			else{
+				accum2==0;
+			}
 			RotaryResetStatus();
 			lcd_write_instruction_4d(lcd_Clear);
 			_delay_ms(4);
@@ -58,10 +72,15 @@ void MainScreenUpdate(void)
 			_delay_us(80);
 			//ks0108DrawRoundRect(5, 20, 117, 20, 8, BLACK);
 			//ks0108GotoXY(20,25);
-			counter++;
+			counter = counter + 1 +(1*accum2);;
 			itoa(counter, counterstring, 10);
 			lcd_write_string_4d(counterstring);
 			_delay_us(80);
+			voristatus == 1;
+		}
+		else {
+			//accum2 = 0;
+			//voristatus = 0;
 		}
 }
 /*int main(void) {

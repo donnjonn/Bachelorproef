@@ -17,6 +17,8 @@
 
 
 static uint8_t rotarystatus=0;
+uint8_t accum = 0;
+uint8_t prevstatus = 0;
 
 void RotaryInit(void)
 {
@@ -39,6 +41,13 @@ void RotaryCheckStatus(void)
 		loop_until_bit_is_set(ROTPIN, ROTPA);
 		if (ROTB)
 			rotarystatus = 1;
+			if(prevstatus == 1){
+				accum++;
+			}
+			else{
+				accum = 0;
+			}
+			prevstatus = 1;
 		//check if rotation is right
 	}
 	else if(ROTB & (!ROTA))
@@ -46,14 +55,37 @@ void RotaryCheckStatus(void)
 		loop_until_bit_is_set(ROTPIN, ROTPB);
 		if (ROTA)
 			rotarystatus = 2;
+			if(prevstatus = 2){
+				accum++;
+			}
+			else{
+				accum = 0;
+			}
+			prevstatus = 2;
 	}
 	else if (ROTA & ROTB)
 	{
 		loop_until_bit_is_set(ROTPIN, ROTPA);
-		if (ROTB)
+		if (ROTB){
 			rotarystatus = 1;
-		else 
+			if(prevstatus = 1){
+				accum++;
+			}
+			else{
+				accum = 0;
+			}
+			prevstatus = 1;
+		}
+		else{ 
 			rotarystatus = 2;
+			if(prevstatus = 2){
+				accum++;
+			}
+			else{
+				accum = 0;
+			}
+			prevstatus = 2;
+		}
 	}
 }
 
@@ -66,4 +98,6 @@ uint8_t RotaryGetStatus(void)
 void RotaryResetStatus(void)
 {
 	rotarystatus=0;
+	accum = 0;
+	prevstatus = 0;
 }

@@ -11,6 +11,7 @@ uint8_t program_date[]     = "Sep 16, 2013";
 uint8_t program_txt[]	   = " Anton is cool";
 uint8_t program_txt2[]	   = "[x] doubt";
 uint8_t getal = 44;
+uint8_t teller = 0;
 
 #ifndef F_CPU
 //define cpu clock speed if not defined
@@ -28,17 +29,26 @@ void MainInit(void)
 	//ks0108ClearScreen();
 	//lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
 	//ks0108Puts_P(DEMO);
+	DDRB = 0xFF;
+	TCNT1 = 40536;
+	TCCR1A = 0x00;
+	TCCR1B = (1<<CS12) | (1<<CS10);; //clock / 64
+	TIMSK1 = (1 << TOIE1);
 	//init rottary
-	
 	RotaryInit();
 	//taimerio 2 nustatymas
 	Timer2_Init();
 	//Taimerio 2 paleidimas
 	Timer2_Start();
 	//enable global interrupts
+	
 	DDRD = 0xf0;
-	EICRA |= (1<<ISC00);
-	EIMSK |= (1<<INT0);
+	EIMSK &= ~(1 << INT0); //External Interrupt Mask Register - EIMSK - is for enabling INT[6;3:0] interrupts, INT0 is disabled to avoid false interrupts when mainuplating EICRA
+	EICRA |= (1 << ISC01)|(1 << ISC00); //External Interrupt Control Register A - EICRA - defines the interrupt edge profile, here configured to trigger on rising edge
+	EIFR &= ~(1 << INTF0); //External Interrupt Flag Register - EIFR controls interrupt flags on INT[6;3:0], here it is cleared
+	EIMSK |= (1 << INT0); //Enable INT0
+	//EICRA |= (1<<ISC00);
+	//EIMSK |= (1<<INT0);
 	sei();
 }
 int main(void)
@@ -69,13 +79,7 @@ int main(void)
 	_delay_ms(1000);
 // display the second line of information
     //lcd_write_string_4d(program_version);
-	
-	DDRB = 0xFF;
-	TCNT1 = 40536;
-	TCCR1A = 0x00;
-	TCCR1B = (1<<CS11) | (1<<CS10);; //clock / 64
-	TIMSK1 = (1 << TOIE1);
-	sei(); //enable interrupt
+	 //enable interrupt
 	MainInit();
 // endless loop
     while(1){
@@ -88,14 +92,13 @@ int main(void)
 ISR(TIMER1_OVF_vect) {
 	//lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
 	//lcd_write_string_4d(" ");
-	//getal++;
-	
+	//getal++
 	//lcd_write_character_4d(getal);
 	//_delay_us(80);
 	TCNT1 = 40536;
 }
 
-ISR(INT1_vect)
+ISR(INT0_vect)
 {
 	PORTB ^= 0x10;
 }

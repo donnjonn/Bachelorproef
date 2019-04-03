@@ -3,50 +3,50 @@ GccApplication2.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000002  00800100  00000544  000005d8  2**0
+  0 .data         00000002  00800100  000005b2  00000646  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000544  00000000  00000000  00000094  2**1
+  1 .text         000005b2  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000003  00800102  00800102  000005da  2**0
+  2 .bss          00000006  00800102  00800102  00000648  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000005da  2**0
+  3 .comment      00000030  00000000  00000000  00000648  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000060c  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000678  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000a0  00000000  00000000  00000648  2**0
+  5 .debug_aranges 000000a0  00000000  00000000  000006b4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000126f  00000000  00000000  000006e8  2**0
+  6 .debug_info   000012bb  00000000  00000000  00000754  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000801  00000000  00000000  00001957  2**0
+  7 .debug_abbrev 00000810  00000000  00000000  00001a0f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000727  00000000  00000000  00002158  2**0
+  8 .debug_line   0000076e  00000000  00000000  0000221f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000001c8  00000000  00000000  00002880  2**2
+  9 .debug_frame  000001c8  00000000  00000000  00002990  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000570  00000000  00000000  00002a48  2**0
+ 10 .debug_str    00000586  00000000  00000000  00002b58  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000008d4  00000000  00000000  00002fb8  2**0
+ 11 .debug_loc    000008d4  00000000  00000000  000030de  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000090  00000000  00000000  0000388c  2**0
+ 12 .debug_ranges 00000090  00000000  00000000  000039b2  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
-   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-   8:	0c 94 4e 02 	jmp	0x49c	; 0x49c <__vector_2>
+   4:	0c 94 85 02 	jmp	0x50a	; 0x50a <__vector_1>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
    c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  24:	0c 94 6d 01 	jmp	0x2da	; 0x2da <__vector_9>
+  24:	0c 94 99 01 	jmp	0x332	; 0x332 <__vector_9>
   28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
-  34:	0c 94 3a 02 	jmp	0x474	; 0x474 <__vector_13>
+  34:	0c 94 71 02 	jmp	0x4e2	; 0x4e2 <__vector_13>
   38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
   40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
@@ -72,7 +72,7 @@ Disassembly of section .text:
   74:	11 e0       	ldi	r17, 0x01	; 1
   76:	a0 e0       	ldi	r26, 0x00	; 0
   78:	b1 e0       	ldi	r27, 0x01	; 1
-  7a:	e4 e4       	ldi	r30, 0x44	; 68
+  7a:	e2 eb       	ldi	r30, 0xB2	; 178
   7c:	f5 e0       	ldi	r31, 0x05	; 5
   7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
   80:	05 90       	lpm	r0, Z+
@@ -91,18 +91,18 @@ Disassembly of section .text:
   92:	1d 92       	st	X+, r1
 
 00000094 <.do_clear_bss_start>:
-  94:	a5 30       	cpi	r26, 0x05	; 5
+  94:	a8 30       	cpi	r26, 0x08	; 8
   96:	b2 07       	cpc	r27, r18
   98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
-  9a:	0e 94 fc 01 	call	0x3f8	; 0x3f8 <main>
-  9e:	0c 94 a0 02 	jmp	0x540	; 0x540 <_exit>
+  9a:	0e 94 44 02 	call	0x488	; 0x488 <main>
+  9e:	0c 94 d7 02 	jmp	0x5ae	; 0x5ae <_exit>
 
 000000a2 <__bad_interrupt>:
   a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 000000a6 <lcd_write_4>:
-uint8_t counter = 0;
-
+static uint8_t voristatus = 0;
+uint8_t accum2 = 0;
 //init timer2 
 void Timer2_Init(void)
 {
@@ -333,196 +333,161 @@ void Timer2_Init(void)
  268:	86 b1       	in	r24, 0x06	; 6
  26a:	96 b1       	in	r25, 0x06	; 6
  26c:	80 fd       	sbrc	r24, 0
- 26e:	0a c0       	rjmp	.+20     	; 0x284 <RotaryCheckStatus+0x1c>
+ 26e:	19 c0       	rjmp	.+50     	; 0x2a2 <RotaryCheckStatus+0x3a>
  270:	91 ff       	sbrs	r25, 1
- 272:	08 c0       	rjmp	.+16     	; 0x284 <RotaryCheckStatus+0x1c>
+ 272:	17 c0       	rjmp	.+46     	; 0x2a2 <RotaryCheckStatus+0x3a>
  274:	30 9b       	sbis	0x06, 0	; 6
  276:	fe cf       	rjmp	.-4      	; 0x274 <RotaryCheckStatus+0xc>
  278:	31 99       	sbic	0x06, 1	; 6
- 27a:	23 c0       	rjmp	.+70     	; 0x2c2 <RotaryCheckStatus+0x5a>
+ 27a:	03 c0       	rjmp	.+6      	; 0x282 <RotaryCheckStatus+0x1a>
  27c:	81 e0       	ldi	r24, 0x01	; 1
- 27e:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <rotarystatus>
- 282:	08 95       	ret
- 284:	86 b1       	in	r24, 0x06	; 6
- 286:	96 b1       	in	r25, 0x06	; 6
- 288:	81 fd       	sbrc	r24, 1
- 28a:	0a c0       	rjmp	.+20     	; 0x2a0 <RotaryCheckStatus+0x38>
- 28c:	90 ff       	sbrs	r25, 0
- 28e:	08 c0       	rjmp	.+16     	; 0x2a0 <RotaryCheckStatus+0x38>
- 290:	31 9b       	sbis	0x06, 1	; 6
- 292:	fe cf       	rjmp	.-4      	; 0x290 <RotaryCheckStatus+0x28>
- 294:	30 99       	sbic	0x06, 0	; 6
- 296:	15 c0       	rjmp	.+42     	; 0x2c2 <RotaryCheckStatus+0x5a>
- 298:	82 e0       	ldi	r24, 0x02	; 2
- 29a:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <rotarystatus>
- 29e:	08 95       	ret
- 2a0:	86 b1       	in	r24, 0x06	; 6
- 2a2:	96 b1       	in	r25, 0x06	; 6
- 2a4:	80 fd       	sbrc	r24, 0
- 2a6:	0d c0       	rjmp	.+26     	; 0x2c2 <RotaryCheckStatus+0x5a>
- 2a8:	91 fd       	sbrc	r25, 1
- 2aa:	0b c0       	rjmp	.+22     	; 0x2c2 <RotaryCheckStatus+0x5a>
- 2ac:	30 9b       	sbis	0x06, 0	; 6
- 2ae:	fe cf       	rjmp	.-4      	; 0x2ac <RotaryCheckStatus+0x44>
- 2b0:	31 99       	sbic	0x06, 1	; 6
- 2b2:	04 c0       	rjmp	.+8      	; 0x2bc <RotaryCheckStatus+0x54>
- 2b4:	81 e0       	ldi	r24, 0x01	; 1
- 2b6:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <rotarystatus>
- 2ba:	08 95       	ret
+ 27e:	80 93 07 01 	sts	0x0107, r24	; 0x800107 <rotarystatus>
+ 282:	80 91 05 01 	lds	r24, 0x0105	; 0x800105 <prevstatus>
+ 286:	81 30       	cpi	r24, 0x01	; 1
+ 288:	31 f4       	brne	.+12     	; 0x296 <RotaryCheckStatus+0x2e>
+ 28a:	80 91 06 01 	lds	r24, 0x0106	; 0x800106 <accum>
+ 28e:	8f 5f       	subi	r24, 0xFF	; 255
+ 290:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <accum>
+ 294:	02 c0       	rjmp	.+4      	; 0x29a <RotaryCheckStatus+0x32>
+ 296:	10 92 06 01 	sts	0x0106, r1	; 0x800106 <accum>
+ 29a:	81 e0       	ldi	r24, 0x01	; 1
+ 29c:	80 93 05 01 	sts	0x0105, r24	; 0x800105 <prevstatus>
+ 2a0:	08 95       	ret
+ 2a2:	86 b1       	in	r24, 0x06	; 6
+ 2a4:	96 b1       	in	r25, 0x06	; 6
+ 2a6:	81 fd       	sbrc	r24, 1
+ 2a8:	12 c0       	rjmp	.+36     	; 0x2ce <RotaryCheckStatus+0x66>
+ 2aa:	90 ff       	sbrs	r25, 0
+ 2ac:	10 c0       	rjmp	.+32     	; 0x2ce <RotaryCheckStatus+0x66>
+ 2ae:	31 9b       	sbis	0x06, 1	; 6
+ 2b0:	fe cf       	rjmp	.-4      	; 0x2ae <RotaryCheckStatus+0x46>
+ 2b2:	30 99       	sbic	0x06, 0	; 6
+ 2b4:	03 c0       	rjmp	.+6      	; 0x2bc <RotaryCheckStatus+0x54>
+ 2b6:	82 e0       	ldi	r24, 0x02	; 2
+ 2b8:	80 93 07 01 	sts	0x0107, r24	; 0x800107 <rotarystatus>
  2bc:	82 e0       	ldi	r24, 0x02	; 2
- 2be:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <rotarystatus>
- 2c2:	08 95       	ret
+ 2be:	80 93 05 01 	sts	0x0105, r24	; 0x800105 <prevstatus>
+ 2c2:	80 91 06 01 	lds	r24, 0x0106	; 0x800106 <accum>
+ 2c6:	8f 5f       	subi	r24, 0xFF	; 255
+ 2c8:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <accum>
+ 2cc:	08 95       	ret
+ 2ce:	86 b1       	in	r24, 0x06	; 6
+ 2d0:	96 b1       	in	r25, 0x06	; 6
+ 2d2:	80 fd       	sbrc	r24, 0
+ 2d4:	1b c0       	rjmp	.+54     	; 0x30c <RotaryCheckStatus+0xa4>
+ 2d6:	91 fd       	sbrc	r25, 1
+ 2d8:	19 c0       	rjmp	.+50     	; 0x30c <RotaryCheckStatus+0xa4>
+ 2da:	30 9b       	sbis	0x06, 0	; 6
+ 2dc:	fe cf       	rjmp	.-4      	; 0x2da <RotaryCheckStatus+0x72>
+ 2de:	31 99       	sbic	0x06, 1	; 6
+ 2e0:	0b c0       	rjmp	.+22     	; 0x2f8 <RotaryCheckStatus+0x90>
+ 2e2:	81 e0       	ldi	r24, 0x01	; 1
+ 2e4:	80 93 07 01 	sts	0x0107, r24	; 0x800107 <rotarystatus>
+ 2e8:	80 93 05 01 	sts	0x0105, r24	; 0x800105 <prevstatus>
+ 2ec:	80 91 06 01 	lds	r24, 0x0106	; 0x800106 <accum>
+ 2f0:	8f 5f       	subi	r24, 0xFF	; 255
+ 2f2:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <accum>
+ 2f6:	08 95       	ret
+ 2f8:	82 e0       	ldi	r24, 0x02	; 2
+ 2fa:	80 93 07 01 	sts	0x0107, r24	; 0x800107 <rotarystatus>
+ 2fe:	80 93 05 01 	sts	0x0105, r24	; 0x800105 <prevstatus>
+ 302:	80 91 06 01 	lds	r24, 0x0106	; 0x800106 <accum>
+ 306:	8f 5f       	subi	r24, 0xFF	; 255
+ 308:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <accum>
+ 30c:	08 95       	ret
 
-000002c4 <Timer2_Start>:
+0000030e <RotaryResetStatus>:
+ 30e:	10 92 07 01 	sts	0x0107, r1	; 0x800107 <rotarystatus>
+ 312:	10 92 06 01 	sts	0x0106, r1	; 0x800106 <accum>
+ 316:	10 92 05 01 	sts	0x0105, r1	; 0x800105 <prevstatus>
+ 31a:	08 95       	ret
+
+0000031c <Timer2_Start>:
 } 
 //start timer2
 void Timer2_Start(void)
 {
 	TCCR2B|=(1<<CS22)|(1<<CS21)|(1<<CS20); //prescaler 256 ~122 interrupts/s
- 2c4:	e1 eb       	ldi	r30, 0xB1	; 177
- 2c6:	f0 e0       	ldi	r31, 0x00	; 0
- 2c8:	80 81       	ld	r24, Z
- 2ca:	87 60       	ori	r24, 0x07	; 7
- 2cc:	80 83       	st	Z, r24
+ 31c:	e1 eb       	ldi	r30, 0xB1	; 177
+ 31e:	f0 e0       	ldi	r31, 0x00	; 0
+ 320:	80 81       	ld	r24, Z
+ 322:	87 60       	ori	r24, 0x07	; 7
+ 324:	80 83       	st	Z, r24
 	TIMSK2|=(1<<TOIE2);//Enable Timer0 Overflow interrupts
- 2ce:	e0 e7       	ldi	r30, 0x70	; 112
- 2d0:	f0 e0       	ldi	r31, 0x00	; 0
- 2d2:	80 81       	ld	r24, Z
- 2d4:	81 60       	ori	r24, 0x01	; 1
- 2d6:	80 83       	st	Z, r24
- 2d8:	08 95       	ret
+ 326:	e0 e7       	ldi	r30, 0x70	; 112
+ 328:	f0 e0       	ldi	r31, 0x00	; 0
+ 32a:	80 81       	ld	r24, Z
+ 32c:	81 60       	ori	r24, 0x01	; 1
+ 32e:	80 83       	st	Z, r24
+ 330:	08 95       	ret
 
-000002da <__vector_9>:
+00000332 <__vector_9>:
 }
 //timer ISR check for rotary encoder status
 ISR(TIMER2_OVF_vect)
 {
- 2da:	1f 92       	push	r1
- 2dc:	0f 92       	push	r0
- 2de:	0f b6       	in	r0, 0x3f	; 63
- 2e0:	0f 92       	push	r0
- 2e2:	11 24       	eor	r1, r1
- 2e4:	2f 93       	push	r18
- 2e6:	3f 93       	push	r19
- 2e8:	4f 93       	push	r20
- 2ea:	5f 93       	push	r21
- 2ec:	6f 93       	push	r22
- 2ee:	7f 93       	push	r23
- 2f0:	8f 93       	push	r24
- 2f2:	9f 93       	push	r25
- 2f4:	af 93       	push	r26
- 2f6:	bf 93       	push	r27
- 2f8:	ef 93       	push	r30
- 2fa:	ff 93       	push	r31
+ 332:	1f 92       	push	r1
+ 334:	0f 92       	push	r0
+ 336:	0f b6       	in	r0, 0x3f	; 63
+ 338:	0f 92       	push	r0
+ 33a:	11 24       	eor	r1, r1
+ 33c:	2f 93       	push	r18
+ 33e:	3f 93       	push	r19
+ 340:	4f 93       	push	r20
+ 342:	5f 93       	push	r21
+ 344:	6f 93       	push	r22
+ 346:	7f 93       	push	r23
+ 348:	8f 93       	push	r24
+ 34a:	9f 93       	push	r25
+ 34c:	af 93       	push	r26
+ 34e:	bf 93       	push	r27
+ 350:	ef 93       	push	r30
+ 352:	ff 93       	push	r31
 	//reading rotary and button
 	RotaryCheckStatus();
- 2fc:	0e 94 34 01 	call	0x268	; 0x268 <RotaryCheckStatus>
+ 354:	0e 94 34 01 	call	0x268	; 0x268 <RotaryCheckStatus>
 }
- 300:	ff 91       	pop	r31
- 302:	ef 91       	pop	r30
- 304:	bf 91       	pop	r27
- 306:	af 91       	pop	r26
- 308:	9f 91       	pop	r25
- 30a:	8f 91       	pop	r24
- 30c:	7f 91       	pop	r23
- 30e:	6f 91       	pop	r22
- 310:	5f 91       	pop	r21
- 312:	4f 91       	pop	r20
- 314:	3f 91       	pop	r19
- 316:	2f 91       	pop	r18
- 318:	0f 90       	pop	r0
- 31a:	0f be       	out	0x3f, r0	; 63
- 31c:	0f 90       	pop	r0
- 31e:	1f 90       	pop	r1
- 320:	18 95       	reti
+ 358:	ff 91       	pop	r31
+ 35a:	ef 91       	pop	r30
+ 35c:	bf 91       	pop	r27
+ 35e:	af 91       	pop	r26
+ 360:	9f 91       	pop	r25
+ 362:	8f 91       	pop	r24
+ 364:	7f 91       	pop	r23
+ 366:	6f 91       	pop	r22
+ 368:	5f 91       	pop	r21
+ 36a:	4f 91       	pop	r20
+ 36c:	3f 91       	pop	r19
+ 36e:	2f 91       	pop	r18
+ 370:	0f 90       	pop	r0
+ 372:	0f be       	out	0x3f, r0	; 63
+ 374:	0f 90       	pop	r0
+ 376:	1f 90       	pop	r1
+ 378:	18 95       	reti
 
-00000322 <MainScreenUpdate>:
+0000037a <MainScreenUpdate>:
 }
 
 //return button status
 uint8_t RotaryGetStatus(void)
 {
 	return rotarystatus;
- 322:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <rotarystatus>
+ 37a:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <rotarystatus>
 void MainScreenUpdate(void)
 {
 		//lcd_write_string_4d("doubt");
 		//_delay_us(80);
 		//update encoder status on screen
 		if (RotaryGetStatus() == 1)
- 326:	81 30       	cpi	r24, 0x01	; 1
- 328:	51 f5       	brne	.+84     	; 0x37e <MainScreenUpdate+0x5c>
-}
-//reset status
-void RotaryResetStatus(void)
-{
-	rotarystatus=0;
- 32a:	10 92 04 01 	sts	0x0104, r1	; 0x800104 <rotarystatus>
-		{	
+ 37e:	81 30       	cpi	r24, 0x01	; 1
+ 380:	89 f5       	brne	.+98     	; 0x3e4 <MainScreenUpdate+0x6a>
+				accum2++;
+			}
+			else{
+				accum2==0;
+			}
 			RotaryResetStatus();
-			lcd_write_instruction_4d(lcd_Clear);
- 32e:	0e 94 b2 00 	call	0x164	; 0x164 <lcd_write_instruction_4d>
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
-
-	__builtin_avr_delay_cycles(__ticks_dc);
- 332:	8f e7       	ldi	r24, 0x7F	; 127
- 334:	9e e3       	ldi	r25, 0x3E	; 62
- 336:	01 97       	sbiw	r24, 0x01	; 1
- 338:	f1 f7       	brne	.-4      	; 0x336 <MainScreenUpdate+0x14>
- 33a:	00 c0       	rjmp	.+0      	; 0x33c <MainScreenUpdate+0x1a>
- 33c:	00 00       	nop
-			_delay_ms(4);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
- 33e:	80 ec       	ldi	r24, 0xC0	; 192
- 340:	0e 94 b2 00 	call	0x164	; 0x164 <lcd_write_instruction_4d>
-	#else
-		//round up by default
-		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
-	#endif
-
-	__builtin_avr_delay_cycles(__ticks_dc);
- 344:	8f e3       	ldi	r24, 0x3F	; 63
- 346:	91 e0       	ldi	r25, 0x01	; 1
- 348:	01 97       	sbiw	r24, 0x01	; 1
- 34a:	f1 f7       	brne	.-4      	; 0x348 <MainScreenUpdate+0x26>
- 34c:	00 c0       	rjmp	.+0      	; 0x34e <MainScreenUpdate+0x2c>
- 34e:	00 00       	nop
-			_delay_us(80);
-			//ks0108DrawRoundRect(5, 20, 117, 20, 8, BLACK);
-			//ks0108GotoXY(20,25);
-			counter--;
- 350:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <__data_end>
- 354:	81 50       	subi	r24, 0x01	; 1
- 356:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__data_end>
-			itoa(counter, counterstring, 10);
- 35a:	4a e0       	ldi	r20, 0x0A	; 10
- 35c:	50 e0       	ldi	r21, 0x00	; 0
- 35e:	63 e0       	ldi	r22, 0x03	; 3
- 360:	71 e0       	ldi	r23, 0x01	; 1
- 362:	90 e0       	ldi	r25, 0x00	; 0
- 364:	0e 94 60 02 	call	0x4c0	; 0x4c0 <itoa>
-			lcd_write_string_4d(counterstring);
- 368:	83 e0       	ldi	r24, 0x03	; 3
- 36a:	91 e0       	ldi	r25, 0x01	; 1
- 36c:	0e 94 80 00 	call	0x100	; 0x100 <lcd_write_string_4d>
- 370:	8f e3       	ldi	r24, 0x3F	; 63
- 372:	91 e0       	ldi	r25, 0x01	; 1
- 374:	01 97       	sbiw	r24, 0x01	; 1
- 376:	f1 f7       	brne	.-4      	; 0x374 <MainScreenUpdate+0x52>
- 378:	00 c0       	rjmp	.+0      	; 0x37a <MainScreenUpdate+0x58>
- 37a:	00 00       	nop
- 37c:	08 95       	ret
-			_delay_us(80);
-		}
-		else if (RotaryGetStatus() == 2)
- 37e:	82 30       	cpi	r24, 0x02	; 2
- 380:	51 f5       	brne	.+84     	; 0x3d6 <MainScreenUpdate+0xb4>
- 382:	10 92 04 01 	sts	0x0104, r1	; 0x800104 <rotarystatus>
-		{	
-			RotaryResetStatus();
+ 382:	0e 94 87 01 	call	0x30e	; 0x30e <RotaryResetStatus>
 			lcd_write_instruction_4d(lcd_Clear);
  386:	81 e0       	ldi	r24, 0x01	; 1
  388:	0e 94 b2 00 	call	0x164	; 0x164 <lcd_write_instruction_4d>
@@ -535,8 +500,8 @@ void RotaryResetStatus(void)
  38c:	8f e7       	ldi	r24, 0x7F	; 127
  38e:	9e e3       	ldi	r25, 0x3E	; 62
  390:	01 97       	sbiw	r24, 0x01	; 1
- 392:	f1 f7       	brne	.-4      	; 0x390 <MainScreenUpdate+0x6e>
- 394:	00 c0       	rjmp	.+0      	; 0x396 <MainScreenUpdate+0x74>
+ 392:	f1 f7       	brne	.-4      	; 0x390 <MainScreenUpdate+0x16>
+ 394:	00 c0       	rjmp	.+0      	; 0x396 <MainScreenUpdate+0x1c>
  396:	00 00       	nop
 			_delay_ms(4);
 			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
@@ -551,300 +516,381 @@ void RotaryResetStatus(void)
  39e:	8f e3       	ldi	r24, 0x3F	; 63
  3a0:	91 e0       	ldi	r25, 0x01	; 1
  3a2:	01 97       	sbiw	r24, 0x01	; 1
- 3a4:	f1 f7       	brne	.-4      	; 0x3a2 <MainScreenUpdate+0x80>
- 3a6:	00 c0       	rjmp	.+0      	; 0x3a8 <MainScreenUpdate+0x86>
+ 3a4:	f1 f7       	brne	.-4      	; 0x3a2 <MainScreenUpdate+0x28>
+ 3a6:	00 c0       	rjmp	.+0      	; 0x3a8 <MainScreenUpdate+0x2e>
  3a8:	00 00       	nop
 			_delay_us(80);
 			//ks0108DrawRoundRect(5, 20, 117, 20, 8, BLACK);
 			//ks0108GotoXY(20,25);
-			counter++;
- 3aa:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <__data_end>
- 3ae:	8f 5f       	subi	r24, 0xFF	; 255
- 3b0:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <__data_end>
+			counter= counter-1-(1*accum)-(1*accum2);
+ 3aa:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <counter>
+ 3ae:	90 91 06 01 	lds	r25, 0x0106	; 0x800106 <accum>
+ 3b2:	89 1b       	sub	r24, r25
+ 3b4:	90 91 02 01 	lds	r25, 0x0102	; 0x800102 <__data_end>
+ 3b8:	89 1b       	sub	r24, r25
+ 3ba:	81 50       	subi	r24, 0x01	; 1
+ 3bc:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <counter>
 			itoa(counter, counterstring, 10);
- 3b4:	4a e0       	ldi	r20, 0x0A	; 10
- 3b6:	50 e0       	ldi	r21, 0x00	; 0
- 3b8:	63 e0       	ldi	r22, 0x03	; 3
- 3ba:	71 e0       	ldi	r23, 0x01	; 1
- 3bc:	90 e0       	ldi	r25, 0x00	; 0
- 3be:	0e 94 60 02 	call	0x4c0	; 0x4c0 <itoa>
+ 3c0:	4a e0       	ldi	r20, 0x0A	; 10
+ 3c2:	50 e0       	ldi	r21, 0x00	; 0
+ 3c4:	64 e0       	ldi	r22, 0x04	; 4
+ 3c6:	71 e0       	ldi	r23, 0x01	; 1
+ 3c8:	90 e0       	ldi	r25, 0x00	; 0
+ 3ca:	0e 94 97 02 	call	0x52e	; 0x52e <itoa>
 			lcd_write_string_4d(counterstring);
- 3c2:	83 e0       	ldi	r24, 0x03	; 3
- 3c4:	91 e0       	ldi	r25, 0x01	; 1
- 3c6:	0e 94 80 00 	call	0x100	; 0x100 <lcd_write_string_4d>
- 3ca:	8f e3       	ldi	r24, 0x3F	; 63
- 3cc:	91 e0       	ldi	r25, 0x01	; 1
- 3ce:	01 97       	sbiw	r24, 0x01	; 1
- 3d0:	f1 f7       	brne	.-4      	; 0x3ce <MainScreenUpdate+0xac>
- 3d2:	00 c0       	rjmp	.+0      	; 0x3d4 <MainScreenUpdate+0xb2>
- 3d4:	00 00       	nop
- 3d6:	08 95       	ret
-
-000003d8 <MainInit>:
-	//ks0108ClearScreen();
-	//lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
-	//ks0108Puts_P(DEMO);
-	//init rottary
-	
-	RotaryInit();
- 3d8:	0e 94 2d 01 	call	0x25a	; 0x25a <RotaryInit>
-uint8_t counter = 0;
-
-//init timer2 
-void Timer2_Init(void)
-{
-	TCNT2=0x00;
- 3dc:	10 92 b2 00 	sts	0x00B2, r1	; 0x8000b2 <__TEXT_REGION_LENGTH__+0x7e00b2>
-	//taimerio 2 nustatymas
-	Timer2_Init();
-	//Taimerio 2 paleidimas
-	Timer2_Start();
- 3e0:	0e 94 62 01 	call	0x2c4	; 0x2c4 <Timer2_Start>
-	//enable global interrupts
-	DDRD = 0xf0;
- 3e4:	80 ef       	ldi	r24, 0xF0	; 240
- 3e6:	8a b9       	out	0x0a, r24	; 10
-	EICRA |= (1<<ISC00);
- 3e8:	e9 e6       	ldi	r30, 0x69	; 105
- 3ea:	f0 e0       	ldi	r31, 0x00	; 0
- 3ec:	80 81       	ld	r24, Z
- 3ee:	81 60       	ori	r24, 0x01	; 1
- 3f0:	80 83       	st	Z, r24
-	EIMSK |= (1<<INT0);
- 3f2:	e8 9a       	sbi	0x1d, 0	; 29
-	sei();
- 3f4:	78 94       	sei
- 3f6:	08 95       	ret
-
-000003f8 <main>:
-}
-int main(void)
-{
-	
-// configure the microprocessor pins for the data lines
-    lcd_D7_ddr |= (1<<lcd_D7_bit);                  // 4 data lines - output
- 3f8:	57 9a       	sbi	0x0a, 7	; 10
-    lcd_D6_ddr |= (1<<lcd_D6_bit);
- 3fa:	56 9a       	sbi	0x0a, 6	; 10
-    lcd_D5_ddr |= (1<<lcd_D5_bit);
- 3fc:	55 9a       	sbi	0x0a, 5	; 10
-    lcd_D4_ddr |= (1<<lcd_D4_bit);
- 3fe:	54 9a       	sbi	0x0a, 4	; 10
-
-// configure the microprocessor pins for the control lines
-    lcd_E_ddr |= (1<<lcd_E_bit);                    // E line - output
- 400:	21 9a       	sbi	0x04, 1	; 4
-    lcd_RS_ddr |= (1<<lcd_RS_bit);                  // RS line - output
- 402:	20 9a       	sbi	0x04, 0	; 4
-
-// initialize the LCD controller as determined by the defines (LCD instructions)
-    lcd_init_4d();                                  // initialize the LCD display for a 4-bit interface
- 404:	0e 94 c7 00 	call	0x18e	; 0x18e <lcd_init_4d>
-	
-// display the first line of information
-    //lcd_write_string_4d(program_author);
-
-// set cursor to start of second line
-    lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
- 408:	80 ec       	ldi	r24, 0xC0	; 192
- 40a:	0e 94 b2 00 	call	0x164	; 0x164 <lcd_write_instruction_4d>
- 40e:	8f e3       	ldi	r24, 0x3F	; 63
- 410:	91 e0       	ldi	r25, 0x01	; 1
- 412:	01 97       	sbiw	r24, 0x01	; 1
- 414:	f1 f7       	brne	.-4      	; 0x412 <__LOCK_REGION_LENGTH__+0x12>
- 416:	00 c0       	rjmp	.+0      	; 0x418 <__LOCK_REGION_LENGTH__+0x18>
- 418:	00 00       	nop
-    _delay_us(80);                                  // 40 uS delay (min)
-	getal++;
- 41a:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
- 41e:	8f 5f       	subi	r24, 0xFF	; 255
- 420:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
+ 3ce:	84 e0       	ldi	r24, 0x04	; 4
+ 3d0:	91 e0       	ldi	r25, 0x01	; 1
+ 3d2:	0e 94 80 00 	call	0x100	; 0x100 <lcd_write_string_4d>
+ 3d6:	8f e3       	ldi	r24, 0x3F	; 63
+ 3d8:	91 e0       	ldi	r25, 0x01	; 1
+ 3da:	01 97       	sbiw	r24, 0x01	; 1
+ 3dc:	f1 f7       	brne	.-4      	; 0x3da <MainScreenUpdate+0x60>
+ 3de:	00 c0       	rjmp	.+0      	; 0x3e0 <MainScreenUpdate+0x66>
+ 3e0:	00 00       	nop
+ 3e2:	08 95       	ret
+			_delay_us(80);
+			voristatus == 1;
+		}
+		else if (RotaryGetStatus() == 2)
+ 3e4:	82 30       	cpi	r24, 0x02	; 2
+ 3e6:	69 f5       	brne	.+90     	; 0x442 <__LOCK_REGION_LENGTH__+0x42>
+				accum2++;
+			}
+			else{
+				accum2==0;
+			}
+			RotaryResetStatus();
+ 3e8:	0e 94 87 01 	call	0x30e	; 0x30e <RotaryResetStatus>
+			lcd_write_instruction_4d(lcd_Clear);
+ 3ec:	81 e0       	ldi	r24, 0x01	; 1
+ 3ee:	0e 94 b2 00 	call	0x164	; 0x164 <lcd_write_instruction_4d>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 424:	9f ef       	ldi	r25, 0xFF	; 255
- 426:	23 ed       	ldi	r18, 0xD3	; 211
- 428:	80 e3       	ldi	r24, 0x30	; 48
- 42a:	91 50       	subi	r25, 0x01	; 1
- 42c:	20 40       	sbci	r18, 0x00	; 0
- 42e:	80 40       	sbci	r24, 0x00	; 0
- 430:	e1 f7       	brne	.-8      	; 0x42a <__LOCK_REGION_LENGTH__+0x2a>
- 432:	00 c0       	rjmp	.+0      	; 0x434 <__LOCK_REGION_LENGTH__+0x34>
- 434:	00 00       	nop
+ 3f2:	8f e7       	ldi	r24, 0x7F	; 127
+ 3f4:	9e e3       	ldi	r25, 0x3E	; 62
+ 3f6:	01 97       	sbiw	r24, 0x01	; 1
+ 3f8:	f1 f7       	brne	.-4      	; 0x3f6 <MainScreenUpdate+0x7c>
+ 3fa:	00 c0       	rjmp	.+0      	; 0x3fc <MainScreenUpdate+0x82>
+ 3fc:	00 00       	nop
+			_delay_ms(4);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
+ 3fe:	80 ec       	ldi	r24, 0xC0	; 192
+ 400:	0e 94 b2 00 	call	0x164	; 0x164 <lcd_write_instruction_4d>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 404:	8f e3       	ldi	r24, 0x3F	; 63
+ 406:	91 e0       	ldi	r25, 0x01	; 1
+ 408:	01 97       	sbiw	r24, 0x01	; 1
+ 40a:	f1 f7       	brne	.-4      	; 0x408 <__LOCK_REGION_LENGTH__+0x8>
+ 40c:	00 c0       	rjmp	.+0      	; 0x40e <__LOCK_REGION_LENGTH__+0xe>
+ 40e:	00 00       	nop
+			_delay_us(80);
+			//ks0108DrawRoundRect(5, 20, 117, 20, 8, BLACK);
+			//ks0108GotoXY(20,25);
+			counter = counter + 1 +(1*accum2);;
+ 410:	90 91 03 01 	lds	r25, 0x0103	; 0x800103 <counter>
+ 414:	80 91 02 01 	lds	r24, 0x0102	; 0x800102 <__data_end>
+ 418:	89 0f       	add	r24, r25
+ 41a:	8f 5f       	subi	r24, 0xFF	; 255
+ 41c:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <counter>
+			itoa(counter, counterstring, 10);
+ 420:	4a e0       	ldi	r20, 0x0A	; 10
+ 422:	50 e0       	ldi	r21, 0x00	; 0
+ 424:	64 e0       	ldi	r22, 0x04	; 4
+ 426:	71 e0       	ldi	r23, 0x01	; 1
+ 428:	90 e0       	ldi	r25, 0x00	; 0
+ 42a:	0e 94 97 02 	call	0x52e	; 0x52e <itoa>
+			lcd_write_string_4d(counterstring);
+ 42e:	84 e0       	ldi	r24, 0x04	; 4
+ 430:	91 e0       	ldi	r25, 0x01	; 1
+ 432:	0e 94 80 00 	call	0x100	; 0x100 <lcd_write_string_4d>
+ 436:	8f e3       	ldi	r24, 0x3F	; 63
+ 438:	91 e0       	ldi	r25, 0x01	; 1
+ 43a:	01 97       	sbiw	r24, 0x01	; 1
+ 43c:	f1 f7       	brne	.-4      	; 0x43a <__LOCK_REGION_LENGTH__+0x3a>
+ 43e:	00 c0       	rjmp	.+0      	; 0x440 <__LOCK_REGION_LENGTH__+0x40>
+ 440:	00 00       	nop
+ 442:	08 95       	ret
+
+00000444 <MainInit>:
+	//ks0108SelectFont(SC, ks0108ReadFontData, BLACK);
+	//startup
+	//ks0108ClearScreen();
+	//lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
+	//ks0108Puts_P(DEMO);
+	DDRB = 0xFF;
+ 444:	8f ef       	ldi	r24, 0xFF	; 255
+ 446:	84 b9       	out	0x04, r24	; 4
+	TCNT1 = 40536;
+ 448:	88 e5       	ldi	r24, 0x58	; 88
+ 44a:	9e e9       	ldi	r25, 0x9E	; 158
+ 44c:	90 93 85 00 	sts	0x0085, r25	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+ 450:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+	TCCR1A = 0x00;
+ 454:	10 92 80 00 	sts	0x0080, r1	; 0x800080 <__TEXT_REGION_LENGTH__+0x7e0080>
+	TCCR1B = (1<<CS12) | (1<<CS10);; //clock / 64
+ 458:	85 e0       	ldi	r24, 0x05	; 5
+ 45a:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7e0081>
+	TIMSK1 = (1 << TOIE1);
+ 45e:	81 e0       	ldi	r24, 0x01	; 1
+ 460:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <__TEXT_REGION_LENGTH__+0x7e006f>
+	//init rottary
+	RotaryInit();
+ 464:	0e 94 2d 01 	call	0x25a	; 0x25a <RotaryInit>
+static uint8_t voristatus = 0;
+uint8_t accum2 = 0;
+//init timer2 
+void Timer2_Init(void)
+{
+	TCNT2=0x00;
+ 468:	10 92 b2 00 	sts	0x00B2, r1	; 0x8000b2 <__TEXT_REGION_LENGTH__+0x7e00b2>
+	//taimerio 2 nustatymas
+	Timer2_Init();
+	//Taimerio 2 paleidimas
+	Timer2_Start();
+ 46c:	0e 94 8e 01 	call	0x31c	; 0x31c <Timer2_Start>
+	//enable global interrupts
+	
+	DDRD = 0xf0;
+ 470:	80 ef       	ldi	r24, 0xF0	; 240
+ 472:	8a b9       	out	0x0a, r24	; 10
+	EIMSK &= ~(1 << INT0); //External Interrupt Mask Register - EIMSK - is for enabling INT[6;3:0] interrupts, INT0 is disabled to avoid false interrupts when mainuplating EICRA
+ 474:	e8 98       	cbi	0x1d, 0	; 29
+	EICRA |= (1 << ISC01)|(1 << ISC00); //External Interrupt Control Register A - EICRA - defines the interrupt edge profile, here configured to trigger on rising edge
+ 476:	e9 e6       	ldi	r30, 0x69	; 105
+ 478:	f0 e0       	ldi	r31, 0x00	; 0
+ 47a:	80 81       	ld	r24, Z
+ 47c:	83 60       	ori	r24, 0x03	; 3
+ 47e:	80 83       	st	Z, r24
+	EIFR &= ~(1 << INTF0); //External Interrupt Flag Register - EIFR controls interrupt flags on INT[6;3:0], here it is cleared
+ 480:	e0 98       	cbi	0x1c, 0	; 28
+	EIMSK |= (1 << INT0); //Enable INT0
+ 482:	e8 9a       	sbi	0x1d, 0	; 29
+	//EICRA |= (1<<ISC00);
+	//EIMSK |= (1<<INT0);
+	sei();
+ 484:	78 94       	sei
+ 486:	08 95       	ret
+
+00000488 <main>:
+}
+int main(void)
+{
+	
+// configure the microprocessor pins for the data lines
+    lcd_D7_ddr |= (1<<lcd_D7_bit);                  // 4 data lines - output
+ 488:	57 9a       	sbi	0x0a, 7	; 10
+    lcd_D6_ddr |= (1<<lcd_D6_bit);
+ 48a:	56 9a       	sbi	0x0a, 6	; 10
+    lcd_D5_ddr |= (1<<lcd_D5_bit);
+ 48c:	55 9a       	sbi	0x0a, 5	; 10
+    lcd_D4_ddr |= (1<<lcd_D4_bit);
+ 48e:	54 9a       	sbi	0x0a, 4	; 10
+
+// configure the microprocessor pins for the control lines
+    lcd_E_ddr |= (1<<lcd_E_bit);                    // E line - output
+ 490:	21 9a       	sbi	0x04, 1	; 4
+    lcd_RS_ddr |= (1<<lcd_RS_bit);                  // RS line - output
+ 492:	20 9a       	sbi	0x04, 0	; 4
+
+// initialize the LCD controller as determined by the defines (LCD instructions)
+    lcd_init_4d();                                  // initialize the LCD display for a 4-bit interface
+ 494:	0e 94 c7 00 	call	0x18e	; 0x18e <lcd_init_4d>
+	
+// display the first line of information
+    //lcd_write_string_4d(program_author);
+
+// set cursor to start of second line
+    lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
+ 498:	80 ec       	ldi	r24, 0xC0	; 192
+ 49a:	0e 94 b2 00 	call	0x164	; 0x164 <lcd_write_instruction_4d>
+ 49e:	8f e3       	ldi	r24, 0x3F	; 63
+ 4a0:	91 e0       	ldi	r25, 0x01	; 1
+ 4a2:	01 97       	sbiw	r24, 0x01	; 1
+ 4a4:	f1 f7       	brne	.-4      	; 0x4a2 <main+0x1a>
+ 4a6:	00 c0       	rjmp	.+0      	; 0x4a8 <main+0x20>
+ 4a8:	00 00       	nop
+    _delay_us(80);                                  // 40 uS delay (min)
+	getal++;
+ 4aa:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__data_start>
+ 4ae:	8f 5f       	subi	r24, 0xFF	; 255
+ 4b0:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__data_start>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 4b4:	9f ef       	ldi	r25, 0xFF	; 255
+ 4b6:	23 ed       	ldi	r18, 0xD3	; 211
+ 4b8:	80 e3       	ldi	r24, 0x30	; 48
+ 4ba:	91 50       	subi	r25, 0x01	; 1
+ 4bc:	20 40       	sbci	r18, 0x00	; 0
+ 4be:	80 40       	sbci	r24, 0x00	; 0
+ 4c0:	e1 f7       	brne	.-8      	; 0x4ba <main+0x32>
+ 4c2:	00 c0       	rjmp	.+0      	; 0x4c4 <main+0x3c>
+ 4c4:	00 00       	nop
 	
 	_delay_ms(1000);
 // display the second line of information
     //lcd_write_string_4d(program_version);
-	
-	DDRB = 0xFF;
- 436:	8f ef       	ldi	r24, 0xFF	; 255
- 438:	84 b9       	out	0x04, r24	; 4
-	TCNT1 = 40536;
- 43a:	88 e5       	ldi	r24, 0x58	; 88
- 43c:	9e e9       	ldi	r25, 0x9E	; 158
- 43e:	90 93 85 00 	sts	0x0085, r25	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
- 442:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
-	TCCR1A = 0x00;
- 446:	10 92 80 00 	sts	0x0080, r1	; 0x800080 <__TEXT_REGION_LENGTH__+0x7e0080>
-	TCCR1B = (1<<CS11) | (1<<CS10);; //clock / 64
- 44a:	83 e0       	ldi	r24, 0x03	; 3
- 44c:	80 93 81 00 	sts	0x0081, r24	; 0x800081 <__TEXT_REGION_LENGTH__+0x7e0081>
-	TIMSK1 = (1 << TOIE1);
- 450:	81 e0       	ldi	r24, 0x01	; 1
- 452:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <__TEXT_REGION_LENGTH__+0x7e006f>
-	sei(); //enable interrupt
- 456:	78 94       	sei
+	 //enable interrupt
 	MainInit();
- 458:	0e 94 ec 01 	call	0x3d8	; 0x3d8 <MainInit>
- 45c:	9f ef       	ldi	r25, 0xFF	; 255
- 45e:	21 ee       	ldi	r18, 0xE1	; 225
- 460:	84 e0       	ldi	r24, 0x04	; 4
- 462:	91 50       	subi	r25, 0x01	; 1
- 464:	20 40       	sbci	r18, 0x00	; 0
- 466:	80 40       	sbci	r24, 0x00	; 0
- 468:	e1 f7       	brne	.-8      	; 0x462 <__LOCK_REGION_LENGTH__+0x62>
- 46a:	00 c0       	rjmp	.+0      	; 0x46c <__LOCK_REGION_LENGTH__+0x6c>
- 46c:	00 00       	nop
+ 4c6:	0e 94 22 02 	call	0x444	; 0x444 <MainInit>
+ 4ca:	9f ef       	ldi	r25, 0xFF	; 255
+ 4cc:	21 ee       	ldi	r18, 0xE1	; 225
+ 4ce:	84 e0       	ldi	r24, 0x04	; 4
+ 4d0:	91 50       	subi	r25, 0x01	; 1
+ 4d2:	20 40       	sbci	r18, 0x00	; 0
+ 4d4:	80 40       	sbci	r24, 0x00	; 0
+ 4d6:	e1 f7       	brne	.-8      	; 0x4d0 <main+0x48>
+ 4d8:	00 c0       	rjmp	.+0      	; 0x4da <main+0x52>
+ 4da:	00 00       	nop
 // endless loop
     while(1){
 		_delay_ms(100);
 		MainScreenUpdate();
- 46e:	0e 94 91 01 	call	0x322	; 0x322 <MainScreenUpdate>
- 472:	f4 cf       	rjmp	.-24     	; 0x45c <__LOCK_REGION_LENGTH__+0x5c>
+ 4dc:	0e 94 bd 01 	call	0x37a	; 0x37a <MainScreenUpdate>
+ 4e0:	f4 cf       	rjmp	.-24     	; 0x4ca <main+0x42>
 
-00000474 <__vector_13>:
+000004e2 <__vector_13>:
 	}
     return 0;
 }
 
 ISR(TIMER1_OVF_vect) {
- 474:	1f 92       	push	r1
- 476:	0f 92       	push	r0
- 478:	0f b6       	in	r0, 0x3f	; 63
- 47a:	0f 92       	push	r0
- 47c:	11 24       	eor	r1, r1
- 47e:	8f 93       	push	r24
- 480:	9f 93       	push	r25
+ 4e2:	1f 92       	push	r1
+ 4e4:	0f 92       	push	r0
+ 4e6:	0f b6       	in	r0, 0x3f	; 63
+ 4e8:	0f 92       	push	r0
+ 4ea:	11 24       	eor	r1, r1
+ 4ec:	8f 93       	push	r24
+ 4ee:	9f 93       	push	r25
+	//lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
 	//lcd_write_string_4d(" ");
-	//getal++;
-	
+	//getal++
 	//lcd_write_character_4d(getal);
 	//_delay_us(80);
 	TCNT1 = 40536;
- 482:	88 e5       	ldi	r24, 0x58	; 88
- 484:	9e e9       	ldi	r25, 0x9E	; 158
- 486:	90 93 85 00 	sts	0x0085, r25	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
- 48a:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
+ 4f0:	88 e5       	ldi	r24, 0x58	; 88
+ 4f2:	9e e9       	ldi	r25, 0x9E	; 158
+ 4f4:	90 93 85 00 	sts	0x0085, r25	; 0x800085 <__TEXT_REGION_LENGTH__+0x7e0085>
+ 4f8:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <__TEXT_REGION_LENGTH__+0x7e0084>
 }
- 48e:	9f 91       	pop	r25
- 490:	8f 91       	pop	r24
- 492:	0f 90       	pop	r0
- 494:	0f be       	out	0x3f, r0	; 63
- 496:	0f 90       	pop	r0
- 498:	1f 90       	pop	r1
- 49a:	18 95       	reti
+ 4fc:	9f 91       	pop	r25
+ 4fe:	8f 91       	pop	r24
+ 500:	0f 90       	pop	r0
+ 502:	0f be       	out	0x3f, r0	; 63
+ 504:	0f 90       	pop	r0
+ 506:	1f 90       	pop	r1
+ 508:	18 95       	reti
 
-0000049c <__vector_2>:
+0000050a <__vector_1>:
 
-ISR(INT1_vect)
+ISR(INT0_vect)
 {
- 49c:	1f 92       	push	r1
- 49e:	0f 92       	push	r0
- 4a0:	0f b6       	in	r0, 0x3f	; 63
- 4a2:	0f 92       	push	r0
- 4a4:	11 24       	eor	r1, r1
- 4a6:	8f 93       	push	r24
- 4a8:	9f 93       	push	r25
+ 50a:	1f 92       	push	r1
+ 50c:	0f 92       	push	r0
+ 50e:	0f b6       	in	r0, 0x3f	; 63
+ 510:	0f 92       	push	r0
+ 512:	11 24       	eor	r1, r1
+ 514:	8f 93       	push	r24
+ 516:	9f 93       	push	r25
 	PORTB ^= 0x10;
- 4aa:	95 b1       	in	r25, 0x05	; 5
- 4ac:	80 e1       	ldi	r24, 0x10	; 16
- 4ae:	89 27       	eor	r24, r25
- 4b0:	85 b9       	out	0x05, r24	; 5
+ 518:	95 b1       	in	r25, 0x05	; 5
+ 51a:	80 e1       	ldi	r24, 0x10	; 16
+ 51c:	89 27       	eor	r24, r25
+ 51e:	85 b9       	out	0x05, r24	; 5
 }
- 4b2:	9f 91       	pop	r25
- 4b4:	8f 91       	pop	r24
- 4b6:	0f 90       	pop	r0
- 4b8:	0f be       	out	0x3f, r0	; 63
- 4ba:	0f 90       	pop	r0
- 4bc:	1f 90       	pop	r1
- 4be:	18 95       	reti
+ 520:	9f 91       	pop	r25
+ 522:	8f 91       	pop	r24
+ 524:	0f 90       	pop	r0
+ 526:	0f be       	out	0x3f, r0	; 63
+ 528:	0f 90       	pop	r0
+ 52a:	1f 90       	pop	r1
+ 52c:	18 95       	reti
 
-000004c0 <itoa>:
- 4c0:	45 32       	cpi	r20, 0x25	; 37
- 4c2:	51 05       	cpc	r21, r1
- 4c4:	20 f4       	brcc	.+8      	; 0x4ce <itoa+0xe>
- 4c6:	42 30       	cpi	r20, 0x02	; 2
- 4c8:	10 f0       	brcs	.+4      	; 0x4ce <itoa+0xe>
- 4ca:	0c 94 6b 02 	jmp	0x4d6	; 0x4d6 <__itoa_ncheck>
- 4ce:	fb 01       	movw	r30, r22
- 4d0:	10 82       	st	Z, r1
- 4d2:	cb 01       	movw	r24, r22
- 4d4:	08 95       	ret
+0000052e <itoa>:
+ 52e:	45 32       	cpi	r20, 0x25	; 37
+ 530:	51 05       	cpc	r21, r1
+ 532:	20 f4       	brcc	.+8      	; 0x53c <itoa+0xe>
+ 534:	42 30       	cpi	r20, 0x02	; 2
+ 536:	10 f0       	brcs	.+4      	; 0x53c <itoa+0xe>
+ 538:	0c 94 a2 02 	jmp	0x544	; 0x544 <__itoa_ncheck>
+ 53c:	fb 01       	movw	r30, r22
+ 53e:	10 82       	st	Z, r1
+ 540:	cb 01       	movw	r24, r22
+ 542:	08 95       	ret
 
-000004d6 <__itoa_ncheck>:
- 4d6:	bb 27       	eor	r27, r27
- 4d8:	4a 30       	cpi	r20, 0x0A	; 10
- 4da:	31 f4       	brne	.+12     	; 0x4e8 <__itoa_ncheck+0x12>
- 4dc:	99 23       	and	r25, r25
- 4de:	22 f4       	brpl	.+8      	; 0x4e8 <__itoa_ncheck+0x12>
- 4e0:	bd e2       	ldi	r27, 0x2D	; 45
- 4e2:	90 95       	com	r25
- 4e4:	81 95       	neg	r24
- 4e6:	9f 4f       	sbci	r25, 0xFF	; 255
- 4e8:	0c 94 77 02 	jmp	0x4ee	; 0x4ee <__utoa_common>
+00000544 <__itoa_ncheck>:
+ 544:	bb 27       	eor	r27, r27
+ 546:	4a 30       	cpi	r20, 0x0A	; 10
+ 548:	31 f4       	brne	.+12     	; 0x556 <__itoa_ncheck+0x12>
+ 54a:	99 23       	and	r25, r25
+ 54c:	22 f4       	brpl	.+8      	; 0x556 <__itoa_ncheck+0x12>
+ 54e:	bd e2       	ldi	r27, 0x2D	; 45
+ 550:	90 95       	com	r25
+ 552:	81 95       	neg	r24
+ 554:	9f 4f       	sbci	r25, 0xFF	; 255
+ 556:	0c 94 ae 02 	jmp	0x55c	; 0x55c <__utoa_common>
 
-000004ec <__utoa_ncheck>:
- 4ec:	bb 27       	eor	r27, r27
+0000055a <__utoa_ncheck>:
+ 55a:	bb 27       	eor	r27, r27
 
-000004ee <__utoa_common>:
- 4ee:	fb 01       	movw	r30, r22
- 4f0:	55 27       	eor	r21, r21
- 4f2:	aa 27       	eor	r26, r26
- 4f4:	88 0f       	add	r24, r24
- 4f6:	99 1f       	adc	r25, r25
- 4f8:	aa 1f       	adc	r26, r26
- 4fa:	a4 17       	cp	r26, r20
- 4fc:	10 f0       	brcs	.+4      	; 0x502 <__utoa_common+0x14>
- 4fe:	a4 1b       	sub	r26, r20
- 500:	83 95       	inc	r24
- 502:	50 51       	subi	r21, 0x10	; 16
- 504:	b9 f7       	brne	.-18     	; 0x4f4 <__utoa_common+0x6>
- 506:	a0 5d       	subi	r26, 0xD0	; 208
- 508:	aa 33       	cpi	r26, 0x3A	; 58
- 50a:	08 f0       	brcs	.+2      	; 0x50e <__utoa_common+0x20>
- 50c:	a9 5d       	subi	r26, 0xD9	; 217
- 50e:	a1 93       	st	Z+, r26
- 510:	00 97       	sbiw	r24, 0x00	; 0
- 512:	79 f7       	brne	.-34     	; 0x4f2 <__utoa_common+0x4>
- 514:	b1 11       	cpse	r27, r1
- 516:	b1 93       	st	Z+, r27
- 518:	11 92       	st	Z+, r1
- 51a:	cb 01       	movw	r24, r22
- 51c:	0c 94 90 02 	jmp	0x520	; 0x520 <strrev>
+0000055c <__utoa_common>:
+ 55c:	fb 01       	movw	r30, r22
+ 55e:	55 27       	eor	r21, r21
+ 560:	aa 27       	eor	r26, r26
+ 562:	88 0f       	add	r24, r24
+ 564:	99 1f       	adc	r25, r25
+ 566:	aa 1f       	adc	r26, r26
+ 568:	a4 17       	cp	r26, r20
+ 56a:	10 f0       	brcs	.+4      	; 0x570 <__utoa_common+0x14>
+ 56c:	a4 1b       	sub	r26, r20
+ 56e:	83 95       	inc	r24
+ 570:	50 51       	subi	r21, 0x10	; 16
+ 572:	b9 f7       	brne	.-18     	; 0x562 <__utoa_common+0x6>
+ 574:	a0 5d       	subi	r26, 0xD0	; 208
+ 576:	aa 33       	cpi	r26, 0x3A	; 58
+ 578:	08 f0       	brcs	.+2      	; 0x57c <__utoa_common+0x20>
+ 57a:	a9 5d       	subi	r26, 0xD9	; 217
+ 57c:	a1 93       	st	Z+, r26
+ 57e:	00 97       	sbiw	r24, 0x00	; 0
+ 580:	79 f7       	brne	.-34     	; 0x560 <__utoa_common+0x4>
+ 582:	b1 11       	cpse	r27, r1
+ 584:	b1 93       	st	Z+, r27
+ 586:	11 92       	st	Z+, r1
+ 588:	cb 01       	movw	r24, r22
+ 58a:	0c 94 c7 02 	jmp	0x58e	; 0x58e <strrev>
 
-00000520 <strrev>:
- 520:	dc 01       	movw	r26, r24
- 522:	fc 01       	movw	r30, r24
- 524:	67 2f       	mov	r22, r23
- 526:	71 91       	ld	r23, Z+
- 528:	77 23       	and	r23, r23
- 52a:	e1 f7       	brne	.-8      	; 0x524 <strrev+0x4>
- 52c:	32 97       	sbiw	r30, 0x02	; 2
- 52e:	04 c0       	rjmp	.+8      	; 0x538 <strrev+0x18>
- 530:	7c 91       	ld	r23, X
- 532:	6d 93       	st	X+, r22
- 534:	70 83       	st	Z, r23
- 536:	62 91       	ld	r22, -Z
- 538:	ae 17       	cp	r26, r30
- 53a:	bf 07       	cpc	r27, r31
- 53c:	c8 f3       	brcs	.-14     	; 0x530 <strrev+0x10>
- 53e:	08 95       	ret
+0000058e <strrev>:
+ 58e:	dc 01       	movw	r26, r24
+ 590:	fc 01       	movw	r30, r24
+ 592:	67 2f       	mov	r22, r23
+ 594:	71 91       	ld	r23, Z+
+ 596:	77 23       	and	r23, r23
+ 598:	e1 f7       	brne	.-8      	; 0x592 <strrev+0x4>
+ 59a:	32 97       	sbiw	r30, 0x02	; 2
+ 59c:	04 c0       	rjmp	.+8      	; 0x5a6 <strrev+0x18>
+ 59e:	7c 91       	ld	r23, X
+ 5a0:	6d 93       	st	X+, r22
+ 5a2:	70 83       	st	Z, r23
+ 5a4:	62 91       	ld	r22, -Z
+ 5a6:	ae 17       	cp	r26, r30
+ 5a8:	bf 07       	cpc	r27, r31
+ 5aa:	c8 f3       	brcs	.-14     	; 0x59e <strrev+0x10>
+ 5ac:	08 95       	ret
 
-00000540 <_exit>:
- 540:	f8 94       	cli
+000005ae <_exit>:
+ 5ae:	f8 94       	cli
 
-00000542 <__stop_program>:
- 542:	ff cf       	rjmp	.-2      	; 0x542 <__stop_program>
+000005b0 <__stop_program>:
+ 5b0:	ff cf       	rjmp	.-2      	; 0x5b0 <__stop_program>
