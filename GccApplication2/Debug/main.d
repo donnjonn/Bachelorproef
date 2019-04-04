@@ -18,7 +18,7 @@ main.d main.o: .././main.c .././lcd.c \
  .././m32rotary.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- .././rotary.c .././rotary.h
+ .././rotary.c .././rotary.h .././PWM.c
 
 .././lcd.c:
 
@@ -63,3 +63,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 .././rotary.c:
 
 .././rotary.h:
+
+.././PWM.c:

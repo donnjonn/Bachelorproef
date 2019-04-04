@@ -1,55 +1,58 @@
 
-// Program ID
 #include "lcd.c"
-//#include "rot_enc.c"
 #include "m32rotary.c"
 #include <avr/io.h>
 #include <avr/interrupt.h>
-uint8_t program_author[]   = "Jonas & Anton ";
-uint8_t program_version[]  = "LCD-AVR-4d (gcc)";
-uint8_t program_date[]     = "Sep 16, 2013";
-uint8_t program_txt[]	   = " Anton is cool";
-uint8_t program_txt2[]	   = "[x] doubt";
-uint8_t getal = 44;
-uint8_t teller = 0;
 
-#ifndef F_CPU
-//define cpu clock speed if not defined
 #define F_CPU 16000000
-#endif
 
-void MainInit(void)
+void ExtIntInit(void)
 {
-	// Wait a little while the display starts up
-	//for(volatile uint16_t i=0; i<15000; i++);
-	// Initialize the LCD
-	//lcd_init_4d();
-	//ks0108SelectFont(SC, ks0108ReadFontData, BLACK);
-	//startup
-	//ks0108ClearScreen();
-	//lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
-	//ks0108Puts_P(DEMO);
-	DDRB = 0xFF;
-	TCNT1 = 40536;
-	TCCR1A = 0x00;
-	TCCR1B = (1<<CS12) | (1<<CS10);; //clock / 64
-	TIMSK1 = (1 << TOIE1);
-	//init rottary
-	RotaryInit();
-	//taimerio 2 nustatymas
-	Timer2_Init();
-	//Taimerio 2 paleidimas
-	Timer2_Start();
-	//enable global interrupts
-	
 	DDRD = 0xf0;
 	EIMSK &= ~(1 << INT0); //External Interrupt Mask Register - EIMSK - is for enabling INT[6;3:0] interrupts, INT0 is disabled to avoid false interrupts when mainuplating EICRA
 	EICRA |= (1 << ISC01)|(1 << ISC00); //External Interrupt Control Register A - EICRA - defines the interrupt edge profile, here configured to trigger on rising edge
 	EIFR &= ~(1 << INTF0); //External Interrupt Flag Register - EIFR controls interrupt flags on INT[6;3:0], here it is cleared
 	EIMSK |= (1 << INT0); //Enable INT0
-	//EICRA |= (1<<ISC00);
-	//EIMSK |= (1<<INT0);
+}
+
+void Timer2_Init(void)
+{
+	TCNT2=0x00;
+}
+//start timer2
+void Timer2_Start(void)
+{
+	TCCR2B|=(1<<CS22)|(1<<CS21)|(1<<CS20); //prescaler 256 ~122 interrupts/s
+	TIMSK2|=(1<<TOIE2);//Enable Timer0 Overflow interrupts
+}
+
+void LcdInit(void)
+{
+	lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
+	lcd_write_string_4d("Amplitude: 0%");
+	_delay_us(80);
+	lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
+	lcd_write_string_4d("Frequentie: 0Hz");
+	_delay_us(80);
+	lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree);
+	lcd_write_string_4d("Duty cycle: 0%");
+	_delay_us(80);
+}
+
+void MainInit(void)
+{
+	//all B-pins to output
+	DDRB = 0xFF;
+	
+	//init
+	RotaryInit();
+	Timer2_Init();
+	Timer2_Start();
+	ExtIntInit();
+	
+	//enable global interrupts
 	sei();
+		LcdInit();
 }
 int main(void)
 {
@@ -66,52 +69,30 @@ int main(void)
 
 // initialize the LCD controller as determined by the defines (LCD instructions)
     lcd_init_4d();                                  // initialize the LCD display for a 4-bit interface
-	
-// display the first line of information
-    //lcd_write_string_4d(program_author);
 
 // set cursor to start of second line
     lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
-    _delay_us(80);                                  // 40 uS delay (min)
-	getal++;
+    _delay_us(80);                                  // 80 uS delay (min)
 	
-	
-	_delay_ms(1000);
-// display the second line of information
-    //lcd_write_string_4d(program_version);
-	 //enable interrupt
 	MainInit();
+	
 // endless loop
     while(1){
-		_delay_ms(100);
+		//_delay_ms(100);
 		MainScreenUpdate();
 	}
     return 0;
 }
 
-ISR(TIMER1_OVF_vect) {
-	//lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
-	//lcd_write_string_4d(" ");
-	//getal++
-	//lcd_write_character_4d(getal);
-	//_delay_us(80);
-	TCNT1 = 40536;
-}
-
 ISR(INT0_vect)
 {
-	PORTB ^= 0x10;
+	PORTB ^= 0x04;
 }
-/******************************* End of Main Program Code ******************/
 
-/*============================== 4-bit LCD Functions ======================*/
-/*
-  Name:     lcd_init_4d
-  Purpose:  initialize the LCD module for a 4-bit data interface
-  Entry:    equates (LCD instructions) set up for the desired operation
-  Exit:     no parameters
-  Notes:    uses time delays rather than checking the busy flag
-*/
-
+ISR(TIMER2_OVF_vect)
+{
+	//reading rotary and button
+	RotaryCheckStatus();
+}
  
         

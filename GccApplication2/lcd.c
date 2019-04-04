@@ -93,7 +93,7 @@
 #define lcd_D4_ddr      DDRD
 
 #define lcd_E_port      PORTB                   // lcd Enable pin
-#define lcd_E_bit       PORTB1
+#define lcd_E_bit       PORTB5
 #define lcd_E_ddr       DDRB
 
 #define lcd_RS_port     PORTB                   // lcd Register Select pin
@@ -103,8 +103,8 @@
 // LCD module information
 #define lcd_LineOne     0x00                    // start of line 1
 #define lcd_LineTwo     0x40                    // start of line 2
-#define   lcd_LineThree   0x14                  // start of line 3 (20x4)
-#define   lcd_lineFour    0x54                  // start of line 4 (20x4)
+#define lcd_LineThree   0x14                  // start of line 3 (20x4)
+#define lcd_lineFour    0x54                  // start of line 4 (20x4)
 //#define   lcd_LineThree   0x10                  // start of line 3 (16x4)
 //#define   lcd_lineFour    0x50                  // start of line 4 (16x4)
 
