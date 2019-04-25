@@ -28,13 +28,18 @@ void Timer2_Start(void)
 
 void LcdInit(void)
 {
+	lcd_write_instruction_4d(lcd_Clear);
+	_delay_ms(4);
 	lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
+	_delay_us(80);
 	lcd_write_string_4d("Amplitude: 0%");
 	_delay_us(80);
 	lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
+	_delay_us(80);
 	lcd_write_string_4d("Frequentie: 0Hz");
 	_delay_us(80);
 	lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree);
+	_delay_us(80);
 	lcd_write_string_4d("Duty cycle: 0%");
 	_delay_us(80);
 }
@@ -52,7 +57,7 @@ void MainInit(void)
 	
 	//enable global interrupts
 	sei();
-		LcdInit();
+	LcdInit();
 }
 int main(void)
 {

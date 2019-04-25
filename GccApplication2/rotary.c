@@ -37,6 +37,10 @@ void RotaryCheckStatus(void)
 			rotarystatus = 2;
 		}
 	}
+	if (ROTCLICK)
+	{
+		rotarystatus=3;
+	}
 }
 
 //return button status
