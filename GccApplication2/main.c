@@ -1,10 +1,10 @@
-
 #include "lcd.c"
 #include "m32rotary.c"
+#include "AD9833.c"
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define F_CPU 16000000
+//#define F_CPU 16000000
 
 void ExtIntInit(void)
 {
@@ -54,6 +54,9 @@ void MainInit(void)
 	Timer2_Init();
 	Timer2_Start();
 	ExtIntInit();
+	SPI_init();
+	AD9833_init();
+	Freq_change(1000,0);
 	
 	//enable global interrupts
 	sei();
