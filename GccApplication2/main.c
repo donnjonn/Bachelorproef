@@ -54,9 +54,9 @@ void MainInit(void)
 	Timer2_Init();
 	Timer2_Start();
 	ExtIntInit();
-	SPI_init();
-	AD9833_init();
-	Freq_change(1000,0);
+	//SPI_init();
+	//AD9833_init();
+	//Freq_change(75,0);
 	
 	//enable global interrupts
 	sei();

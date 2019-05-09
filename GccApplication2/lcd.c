@@ -93,7 +93,7 @@
 #define lcd_D4_ddr      DDRD
 
 #define lcd_E_port      PORTB                   // lcd Enable pin
-#define lcd_E_bit       PORTB5
+#define lcd_E_bit       PORTB1
 #define lcd_E_ddr       DDRB
 
 #define lcd_RS_port     PORTB                   // lcd Register Select pin

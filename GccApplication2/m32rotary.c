@@ -14,7 +14,7 @@ uint8_t counterdc = 0;
 uint8_t counteramp = 0;
 uint8_t modus = 1;
 uint8_t modestring[] = "";
-double counterfreq = 0.0;
+double counterfreq = 75.0;
 
 void MainScreenUpdate(void)
 {
@@ -93,6 +93,7 @@ void MainScreenUpdate(void)
 			else{
 				counterfreq -= 0.1;
 			}
+			//Freq_change(counterfreq);
 			dtostrf(counterfreq,3,1, counterstring);
 			lcd_write_string_4d("Frequentie: ");
 			lcd_write_string_4d(counterstring);
@@ -116,6 +117,7 @@ void MainScreenUpdate(void)
 			else{
 				counterfreq += 0.1;
 			}
+			//Freq_change(counterfreq);
 			dtostrf(counterfreq,3,1, counterstring);
 			lcd_write_string_4d("Frequentie: ");
 			lcd_write_string_4d(counterstring);
