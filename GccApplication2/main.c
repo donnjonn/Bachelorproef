@@ -9,6 +9,7 @@
 void ExtIntInit(void)
 {
 	DDRD = 0xf0;
+	// DDRD &= ;
 	EIMSK &= ~(1 << INT0); //External Interrupt Mask Register - EIMSK - is for enabling INT[6;3:0] interrupts, INT0 is disabled to avoid false interrupts when mainuplating EICRA
 	EICRA |= (1 << ISC01)|(1 << ISC00); //External Interrupt Control Register A - EICRA - defines the interrupt edge profile, here configured to trigger on rising edge
 	EIFR &= ~(1 << INTF0); //External Interrupt Flag Register - EIFR controls interrupt flags on INT[6;3:0], here it is cleared
@@ -32,15 +33,15 @@ void LcdInit(void)
 	_delay_ms(4);
 	lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
 	_delay_us(80);
-	lcd_write_string_4d("Amplitude: 0%");
+	lcd_write_string_4d("Amplitude: 50%");
 	_delay_us(80);
 	lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
 	_delay_us(80);
-	lcd_write_string_4d("Frequentie: 0Hz");
+	lcd_write_string_4d("Frequentie: 75.0Hz");
 	_delay_us(80);
 	lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree);
 	_delay_us(80);
-	lcd_write_string_4d("Duty cycle: 0%");
+	lcd_write_string_4d("Duty cycle: 50%");
 	_delay_us(80);
 }
 
@@ -53,7 +54,7 @@ void MainInit(void)
 	RotaryInit();
 	Timer2_Init();
 	Timer2_Start();
-	ExtIntInit();
+	//ExtIntInit();
 	//SPI_init();
 	//AD9833_init();
 	//Freq_change(75,0);
@@ -61,6 +62,7 @@ void MainInit(void)
 	//enable global interrupts
 	sei();
 	LcdInit();
+	setPWM(50);
 }
 int main(void)
 {

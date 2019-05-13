@@ -10,8 +10,8 @@ Rotary encoder test
 
 //Strings in flash
 uint8_t counterstring[] = "";
-uint8_t counterdc = 0;
-uint8_t counteramp = 0;
+uint8_t counterdc = 50;
+uint8_t counteramp = 50;
 uint8_t modus = 1;
 uint8_t modestring[] = "";
 double counterfreq = 75.0;
@@ -32,8 +32,10 @@ void MainScreenUpdate(void)
 			_delay_us(80);
 			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree);
 			_delay_us(80);
-			if (counterdc-- <= 0)
+			if (counterdc - 10 <= 0)
 				counterdc = 100;
+			else
+				counterdc -= 10;
 			setPWM(counterdc);
 			itoa(counterdc, counterstring, 10);
 			lcd_write_string_4d("Duty cycle: ");
@@ -53,8 +55,10 @@ void MainScreenUpdate(void)
 			_delay_us(80);
 			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree);
 			_delay_us(80);
-			if (counterdc++ >= 100)
+			if (counterdc + 10 >= 100)
 				counterdc = 0;
+			else
+				counterdc += 10;
 			setPWM(counterdc);
 			itoa(counterdc, counterstring, 10);
 			lcd_write_string_4d("Duty cycle: ");

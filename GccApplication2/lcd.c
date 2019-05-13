@@ -81,7 +81,7 @@
 #define lcd_D7_ddr      DDRD
 
 #define lcd_D6_port     PORTD                   // lcd D6 connection
-#define lcd_D6_bit      PORTD6
+#define lcd_D6_bit      PORTD3
 #define lcd_D6_ddr      DDRD
 
 #define lcd_D5_port     PORTD                   // lcd D5 connection
@@ -93,11 +93,11 @@
 #define lcd_D4_ddr      DDRD
 
 #define lcd_E_port      PORTB                   // lcd Enable pin
-#define lcd_E_bit       PORTB1
+#define lcd_E_bit       PORTB1					// D9
 #define lcd_E_ddr       DDRB
 
 #define lcd_RS_port     PORTB                   // lcd Register Select pin
-#define lcd_RS_bit      PORTB0
+#define lcd_RS_bit      PORTB0					// D8
 #define lcd_RS_ddr      DDRB
 
 // LCD module information
