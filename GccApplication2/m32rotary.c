@@ -36,7 +36,6 @@ void MainScreenUpdate(void)
 				counterdc = 100;
 			else
 				counterdc -= 10;
-			setPWM(counterdc);
 			itoa(counterdc, counterstring, 10);
 			lcd_write_string_4d("Duty cycle: ");
 			lcd_write_string_4d(counterstring);
@@ -59,7 +58,6 @@ void MainScreenUpdate(void)
 				counterdc = 0;
 			else
 				counterdc += 10;
-			setPWM(counterdc);
 			itoa(counterdc, counterstring, 10);
 			lcd_write_string_4d("Duty cycle: ");
 			lcd_write_string_4d(counterstring);
@@ -92,12 +90,13 @@ void MainScreenUpdate(void)
 			_delay_us(80);
 			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
 			_delay_us(80);
-			if (counterfreq - 0.1 <= 0)
+			if (counterfreq - 1 <= 0)
 				counterfreq = 100;
 			else{
-				counterfreq -= 0.1;
+				counterfreq -= 1;
 			}
 			//Freq_change(counterfreq);
+			
 			dtostrf(counterfreq,3,1, counterstring);
 			lcd_write_string_4d("Frequentie: ");
 			lcd_write_string_4d(counterstring);
@@ -116,10 +115,10 @@ void MainScreenUpdate(void)
 			_delay_us(80);
 			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
 			_delay_us(80);
-			if (counterfreq + 0.1 >= 100)
+			if (counterfreq + 1 >= 100)
 				counterfreq = 0;
 			else{
-				counterfreq += 0.1;
+				counterfreq += 1;
 			}
 			//Freq_change(counterfreq);
 			dtostrf(counterfreq,3,1, counterstring);
@@ -160,6 +159,7 @@ void MainScreenUpdate(void)
 			else{
 				counteramp -= 10;
 			}
+			setPWM(counteramp);
 			itoa(counteramp, counterstring, 10);
 			lcd_write_string_4d("Amplitude: ");
 			lcd_write_string_4d(counterstring);
@@ -183,6 +183,7 @@ void MainScreenUpdate(void)
 			else{
 				counteramp += 10;
 			}
+			setPWM(counteramp);
 			itoa(counteramp, counterstring, 10);
 			lcd_write_string_4d("Amplitude: ");
 			lcd_write_string_4d(counterstring);
@@ -201,4 +202,11 @@ void MainScreenUpdate(void)
 			_delay_us(80);
 		}
 	}
+}
+
+double dcCalc(void)
+{
+	double tijd;
+	tijd = (1/counterfreq)*(counterdc/100.0);
+	return tijd;
 }

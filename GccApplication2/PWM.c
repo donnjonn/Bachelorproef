@@ -4,9 +4,6 @@
 
 void setPWM(uint8_t counter)
 {
-	DDRD |= (1 << DDD6);
-	// PD6 is now an output
-
 	OCR0A = counter*2.55;
 	// set PWM for 50% duty cycle
 

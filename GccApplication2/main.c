@@ -5,11 +5,12 @@
 #include <avr/interrupt.h>
 
 //#define F_CPU 16000000
+uint8_t countInterrupt;
 
 void ExtIntInit(void)
 {
-	DDRD = 0xf0;
-	// DDRD &= ;
+	//DDRD = 0xf0;
+	DDRD &= 0b11111011;
 	EIMSK &= ~(1 << INT0); //External Interrupt Mask Register - EIMSK - is for enabling INT[6;3:0] interrupts, INT0 is disabled to avoid false interrupts when mainuplating EICRA
 	EICRA |= (1 << ISC01)|(1 << ISC00); //External Interrupt Control Register A - EICRA - defines the interrupt edge profile, here configured to trigger on rising edge
 	EIFR &= ~(1 << INTF0); //External Interrupt Flag Register - EIFR controls interrupt flags on INT[6;3:0], here it is cleared
@@ -25,6 +26,22 @@ void Timer2_Start(void)
 {
 	TCCR2B|=(1<<CS22)|(1<<CS21)|(1<<CS20); //prescaler 256 ~122 interrupts/s
 	TIMSK2|=(1<<TOIE2);//Enable Timer0 Overflow interrupts
+}
+
+void timer1_init(double tijd)
+{
+	countInterrupt = 0;
+	//OCR1A = 0xffff;
+	OCR1A = (tijd*8/100)*(0xFFFF);
+
+	TCCR1B |= (1 << WGM12);
+	// Mode 4, CTC on OCR1A
+
+	TIMSK1 |= (1 << OCIE1A);
+	//Set interrupt on compare match
+
+	TCCR1B |= (1 << CS12) | (1 << CS10);
+	// set prescaler to 1024 and start the timer
 }
 
 void LcdInit(void)
@@ -54,7 +71,7 @@ void MainInit(void)
 	RotaryInit();
 	Timer2_Init();
 	Timer2_Start();
-	//ExtIntInit();
+	ExtIntInit();
 	//SPI_init();
 	//AD9833_init();
 	//Freq_change(75,0);
@@ -96,13 +113,29 @@ int main(void)
 
 ISR(INT0_vect)
 {
-	PORTB ^= 0x04;
+	DDRD |= (1 << DDD6);
+	// PD6 is now an output
+	double tijd = dcCalc();
+	timer1_init(tijd);
 }
 
 ISR(TIMER2_OVF_vect)
 {
 	//reading rotary and button
 	RotaryCheckStatus();
+}
+
+ISR(TIMER1_COMPA_vect)
+{
+	countInterrupt++;
+	if (countInterrupt == 3)
+	{
+		DDRD &= ~(1 << DDD6);
+		// PD6 is now no output
+		TCCR1B &= 0b11111000;
+		countInterrupt = 0;
+	}
+	//TCCR1B |= (0 << CS12) | (0 << CS11) | (0 << CS10);
 }
  
         
