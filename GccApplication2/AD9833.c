@@ -1,16 +1,3 @@
-// ******************************************************************************************************************************** //
-// *******************  SPI Communication driver for AD9833 DDS with Frame Sync,,,  ***********************************************	//
-// ********************************************************************************************************************************	//
-// 	Last modification:  April 2008																									//
-//	Original source:	AVRwiz http://greschenz.dyndns.org/?title=AvrWiz															//
-//	Reference 1: 		http://winavr.scienceprog.com/avr-gcc-tutorial/serial-peripheral-interface-spi-of-avr-microcontrollers.html	//
-// 	Reference 2: 		http://www.mikroe.com/forum/viewtopic.php?t=9976															//
-//	Modified by: 		Michael Grant (krazatchu at hotmail dot com)																//		
-//	Compiler: 			GCC / AVR Studio 4																							//
-//	Target device:		ATmega8 @ 10 MHz																							//
-// 	Application: 		http://www.avrfreaks.net/index.php?name=PNphpBB2&file=viewtopic&t=62560										//
-// ********************************************************************************************************************************	//
-
 #include <avr/io.h>
 #include <math.h>
 #include "AD9833.h"
@@ -22,7 +9,7 @@ Purpose:  initialize the SPI bus
 Input:    none
 Returns:  none
 **************************************************************************/
-void SPI_init (void)
+void SPI_init (void) //Initialize SPI-bus
 {
 	//DDRB = 0xFF;
 	DDRB |= ((1<<PB3) | (1<<PB2) | (1<<PB5));
