@@ -8,122 +8,109 @@ Rotary encoder test
 #include "rotary.c"
 #include "PWM.c"
 
-//Strings in flash
-uint8_t counterstring[] = "";
-uint8_t counterdc = 50;
-uint8_t counteramp = 50;
-uint8_t modus = 1;
-uint8_t modestring[] = "";
-double counterfreq = 75.0;
+uint8_t counterstring[] = ""; //variable for storing the value of the variable you're currently modifying in string format
+uint8_t counterdc = 50; //Initial duty cycle is 50%
+uint8_t counteramp = 50; //Initial amplitude is 50%
+double counterfreq = 75.0; //Initial frequency is 75hz (double because precision is 0.1Hz)
+uint8_t modus = 1; //Initial mode is 1 (modify frequency)
+uint8_t modestring[] = ""; //variable for storing the value of the modus in string format
 
-void MainScreenUpdate(void)
+void MainScreenUpdate(void) // main loop constantly calls this function to keep everything updated
 {
-	if(modus == 0)
+	if(modus == 0) //Modify duty cycle
 	{
-	//update encoder status on screen
-		if (RotaryGetStatus() == 1)
+		if (RotaryGetStatus() == 1) //Rotate left
 		{
 			RotaryResetStatus();
-			//lcd_write_instruction_4d(lcd_Clear);
-			//_delay_ms(4);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree); //Cursor @ beginning of line 3
 			_delay_us(80);
-			lcd_write_string_4d("                    ");
+			lcd_write_string_4d("                    "); //Clear this line
 			_delay_us(80);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree); //Cursor @ beginning of line 3
 			_delay_us(80);
-			if (counterdc - 10 <= 0)
+			if (counterdc - 10 <= 0) //Negative wrap around to 100%
 				counterdc = 100;
 			else
 				counterdc -= 10;
-			itoa(counterdc, counterstring, 10);
+			itoa(counterdc, counterstring, 10); //Store the new value in counterstring
 			lcd_write_string_4d("Duty cycle: ");
-			lcd_write_string_4d(counterstring);
+			lcd_write_string_4d(counterstring); //print on lcd
 			lcd_write_string_4d("%");
 			_delay_us(80);
 		}
 			
-		else if (RotaryGetStatus() == 2)
+		else if (RotaryGetStatus() == 2) //Rotate right
 		{
 			RotaryResetStatus();
-			//lcd_write_instruction_4d(lcd_Clear);
-			//_delay_ms(4);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree); //Cursor @ beginning of line 3
 			_delay_us(80);
-			lcd_write_string_4d("                    ");
+			lcd_write_string_4d("                    "); //Clear this line
 			_delay_us(80);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree); //Cursor @ beginning of line 3
 			_delay_us(80);
-			if (counterdc + 10 >= 100)
+			if (counterdc + 10 >= 100) //Positive wrap around to 0%
 				counterdc = 0;
 			else
 				counterdc += 10;
-			itoa(counterdc, counterstring, 10);
+			itoa(counterdc, counterstring, 10); //Store the new value in counterstring
 			lcd_write_string_4d("Duty cycle: ");
-			lcd_write_string_4d(counterstring);
+			lcd_write_string_4d(counterstring); //Print on lcd
 			lcd_write_string_4d("%");
 			_delay_us(80);
 		}
 			
-		if (RotaryGetStatus() == 3)
+		if (RotaryGetStatus() == 3) //Push button
 		{
 			RotaryResetStatus();
-			modus = 1;
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_lineFour);
+			modus = 1; //change to next mode 
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_lineFour); //Cursor @ beginning of line 3
 			_delay_us(80);
-			itoa(modus, modestring, 10);
-			lcd_write_string_4d(modestring);
+			itoa(modus, modestring, 10); //Store the new value in modestring
+			lcd_write_string_4d(modestring); //print modestring to lcd
 			_delay_us(80);
 		}
 	}
-	else if(modus == 1)
+	else if(modus == 1) //Modify Frequency
 	{
-		//update encoder status on screen
-		if (RotaryGetStatus() == 1)
+		if (RotaryGetStatus() == 1) //Rotate left
 		{
 			RotaryResetStatus();
-			//lcd_write_instruction_4d(lcd_Clear);
-			//_delay_ms(4);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo); //Cursor @ beginning of line 2
 			_delay_us(80);
-			lcd_write_string_4d("                    ");
+			lcd_write_string_4d("                    "); //Clear this line
 			_delay_us(80);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo); //Cursor @ beginning of line 2
 			_delay_us(80);
-			if (counterfreq - 1 <= 0)
+			if (counterfreq - 1 <= 0) //Negative wrap around to 100Hz
 				counterfreq = 100;
 			else{
 				counterfreq -= 1;
 			}
-			//Freq_change(counterfreq);
-			
-			dtostrf(counterfreq,3,1, counterstring);
+			dtostrf(counterfreq,3,1, counterstring); //Store the new value in counterstring
 			lcd_write_string_4d("Frequentie: ");
-			lcd_write_string_4d(counterstring);
-			lcd_write_string_4d("Hz");
+			lcd_write_string_4d(counterstring); //print on lcd
+			lcd_write_string_4d("Hz"); 
 			_delay_us(80);
 		}
 			
 		else if (RotaryGetStatus() == 2)
 		{
 			RotaryResetStatus();
-			//lcd_write_instruction_4d(lcd_Clear);
-			//_delay_ms(4);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo); //Cursor @ beginning of line 3
 			_delay_us(80);
-			lcd_write_string_4d("                    ");
+			lcd_write_string_4d("                    "); //Clear this line
 			_delay_us(80);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo); //Cursor @ beginning of line 3
 			_delay_us(80);
-			if (counterfreq + 1 >= 100)
+			if (counterfreq + 1 >= 100) //Positive wrap around to 0%
 				counterfreq = 0;
 			else{
 				counterfreq += 1;
 			}
 			//Freq_change(counterfreq);
-			dtostrf(counterfreq,3,1, counterstring);
+			dtostrf(counterfreq,3,1, counterstring); //Store the new value in counterstring
 			lcd_write_string_4d("Frequentie: ");
-			lcd_write_string_4d(counterstring);
+			lcd_write_string_4d(counterstring); //print on lcd
 			lcd_write_string_4d("Hz");
 			_delay_us(80);
 		}
@@ -132,10 +119,10 @@ void MainScreenUpdate(void)
 		{
 			RotaryResetStatus();
 			modus = 2;
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_lineFour);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_lineFour); //Cursor @ beginning of line 3
 			_delay_us(80);
-			itoa(modus, modestring, 10);
-			lcd_write_string_4d(modestring);
+			itoa(modus, modestring, 10); //Store the new value in modestring
+			lcd_write_string_4d(modestring); //print modestring to lcd
 			_delay_us(80);
 		}
 	}
@@ -146,23 +133,21 @@ void MainScreenUpdate(void)
 		if (RotaryGetStatus() == 1)
 		{
 			RotaryResetStatus();
-			//lcd_write_instruction_4d(lcd_Clear);
-			//_delay_ms(4);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne); //Cursor @ beginning of line 3
 			_delay_us(80);
-			lcd_write_string_4d("                    ");
+			lcd_write_string_4d("                    "); //Clear this line
 			_delay_us(80);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne); //Cursor @ beginning of line 3
 			_delay_us(80);
-			if (counteramp - 10 <= 0)
+			if (counteramp - 10 <= 0) //Negative wrap around to 100
 				counteramp = 100;
 			else{
 				counteramp -= 10;
 			}
 			setPWM(counteramp);
-			itoa(counteramp, counterstring, 10);
+			itoa(counteramp, counterstring, 10); //Store the new value in counterstring
 			lcd_write_string_4d("Amplitude: ");
-			lcd_write_string_4d(counterstring);
+			lcd_write_string_4d(counterstring); //print on lcd
 			lcd_write_string_4d("%");
 			_delay_us(80);
 		}
@@ -170,23 +155,21 @@ void MainScreenUpdate(void)
 		else if (RotaryGetStatus() == 2)
 		{
 			RotaryResetStatus();
-			//lcd_write_instruction_4d(lcd_Clear);
-			//_delay_ms(4);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne); //Cursor @ beginning of line 3
 			_delay_us(80);
-			lcd_write_string_4d("                    ");
+			lcd_write_string_4d("                    "); //Clear this line
 			_delay_us(80);
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne); //Cursor @ beginning of line 3
 			_delay_us(80);
-			if (counteramp + 10 >= 100)
+			if (counteramp + 10 >= 100) //Positive wrap around to 0%
 				counteramp = 0;
 			else{
 				counteramp += 10;
 			}
 			setPWM(counteramp);
-			itoa(counteramp, counterstring, 10);
+			itoa(counteramp, counterstring, 10); //Store the new value in counterstring
 			lcd_write_string_4d("Amplitude: ");
-			lcd_write_string_4d(counterstring);
+			lcd_write_string_4d(counterstring); //print on lcd
 			lcd_write_string_4d("%");
 			_delay_us(80);
 		}
@@ -195,16 +178,16 @@ void MainScreenUpdate(void)
 		{
 			RotaryResetStatus();
 			modus = 0;
-			lcd_write_instruction_4d(lcd_SetCursor | lcd_lineFour);
+			lcd_write_instruction_4d(lcd_SetCursor | lcd_lineFour); //Cursor @ beginning of line 3
 			_delay_us(80);
-			itoa(modus, modestring, 10);
-			lcd_write_string_4d(modestring);
+			itoa(modus, modestring, 10); //Store the new value in modestring
+			lcd_write_string_4d(modestring); //print modestring to lcd
 			_delay_us(80);
 		}
 	}
 }
 
-double dcCalc(void)
+double dcCalc(void) //Calculate the time the output to led needs to be enabled in secs
 {
 	double tijd;
 	tijd = (1/counterfreq)*(counterdc/100.0);

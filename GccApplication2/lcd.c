@@ -1,59 +1,10 @@
-  
-   
-/****************************************************************************
-    LCD-AVR-4d.c  - Use an HD44780U based LCD with an Atmel ATmega processor
- 
-    Copyright (C) 2013 Donald Weiman    (weimandn@alfredstate.edu)
- 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
- 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
- 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/****************************************************************************
-         File:    LCD-AVR-4d.c
-         Date:    September 16, 2013
- 
-       Target:    ATmega328
-     Compiler:    avr-gcc (AVR Studio 6)
-       Author:    Donald Weiman
- 
-      Summary:    4-bit data interface, busy flag not implemented.
-                  Any LCD pin can be connected to any available I/O port.
-                  Includes a simple write string routine.
- */
-/******************************* Program Notes ******************************
- 
-            This program uses a 4-bit data interface but does not use the
-              busy flag to determine when the LCD controller is ready.  The
-              LCD RW line (pin 5) is not connected to the uP and it must be
-              connected to GND for the program to function.
- 
-            All time delays are longer than those specified in most datasheets
-              in order to accommodate slower than normal LCD modules.  This
-              requirement is well documented but almost always ignored.  The
-              information is in a note at the bottom of the right hand
-              (Execution Time) column of the instruction set.
- 
-  ***************************************************************************
- 
-            The four data lines as well as the two control lines may be
-              implemented on any available I/O pin of any port.  These are
-              the connections used for this program:
- 
+/***************************************************************************
+Change this to the right connections!
                  -----------                   ----------
                 | ATmega328 |                 |   LCD    |
                 |           |                 |          |
                 |        PD7|---------------->|D7        |
-                |        PD6|---------------->|D6        |
+                |        PD3|---------------->|D6        |
                 |        PD5|---------------->|D5        |
                 |        PD4|---------------->|D4        |
                 |           |                 |D3        |
@@ -61,9 +12,9 @@
                 |           |                 |D1        |
                 |           |                 |D0        |
                 |           |                 |          |
-                |        PB1|---------------->|E         |
+                |     PB1/D9|---------------->|E         |
                 |           |         GND --->|RW        |
-                |        PB0|---------------->|RS        |
+                |     PB0/D8|---------------->|RS        |
                  -----------                   ----------
  
   **************************************************************************/
@@ -74,21 +25,19 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-// LCD interface (should agree with the diagram above)
-//   make sure that the LCD RW pin is connected to GND
-#define lcd_D7_port     PORTD                   // lcd D7 connection
+#define lcd_D7_port     PORTD                   // lcd Data 7 connection
 #define lcd_D7_bit      PORTD7
 #define lcd_D7_ddr      DDRD
 
-#define lcd_D6_port     PORTD                   // lcd D6 connection
+#define lcd_D6_port     PORTD                   // lcd Data 6 connection
 #define lcd_D6_bit      PORTD3
 #define lcd_D6_ddr      DDRD
 
-#define lcd_D5_port     PORTD                   // lcd D5 connection
+#define lcd_D5_port     PORTD                   // lcd Data 5 connection
 #define lcd_D5_bit      PORTD5
 #define lcd_D5_ddr      DDRD
 
-#define lcd_D4_port     PORTD                   // lcd D4 connection
+#define lcd_D4_port     PORTD                   // lcd Data 4 connection
 #define lcd_D4_bit      PORTD4
 #define lcd_D4_ddr      DDRD
 
@@ -100,13 +49,10 @@
 #define lcd_RS_bit      PORTB0					// D8
 #define lcd_RS_ddr      DDRB
 
-// LCD module information
-#define lcd_LineOne     0x00                    // start of line 1
-#define lcd_LineTwo     0x40                    // start of line 2
-#define lcd_LineThree   0x14                  // start of line 3 (20x4)
-#define lcd_lineFour    0x54                  // start of line 4 (20x4)
-//#define   lcd_LineThree   0x10                  // start of line 3 (16x4)
-//#define   lcd_lineFour    0x50                  // start of line 4 (16x4)
+#define lcd_LineOne     0x00                    // startlocation of line 1
+#define lcd_LineTwo     0x40                    // startlocation of line 2
+#define lcd_LineThree   0x14                    // startlocation of line 3 (20x4)
+#define lcd_lineFour    0x54                    // startlocation of line 4 (20x4)
 
 // LCD instructions
 #define lcd_Clear           0b00000001          // replace all characters with ASCII 'space'
@@ -122,19 +68,6 @@ void lcd_init_4d(void)
 {
 // Power-up delay
     _delay_ms(100);                                 // initial 40 mSec delay
-
-// IMPORTANT - At this point the LCD module is in the 8-bit mode and it is expecting to receive  
-//   8 bits of data, one bit on each of its 8 data lines, each time the 'E' line is pulsed.
-//
-// Since the LCD module is wired for the 4-bit mode, only the upper four data lines are connected to 
-//   the microprocessor and the lower four data lines are typically left open.  Therefore, when 
-//   the 'E' line is pulsed, the LCD controller will read whatever data has been set up on the upper 
-//   four data lines and the lower four data lines will be high (due to internal pull-up circuitry).
-//
-// Fortunately the 'FunctionReset' instruction does not care about what is on the lower four bits so  
-//   this instruction can be sent on just the four available data lines and it will be interpreted 
-//   properly by the LCD controller.  The 'lcd_write_4' subroutine will accomplish this if the 
-//   control lines have previously been configured properly.
 
 // Set up the RS and E lines for the 'lcd_write_4' subroutine.
     lcd_RS_port &= ~(1<<lcd_RS_bit);                // select the Instruction Register (RS low)
