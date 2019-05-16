@@ -54,12 +54,12 @@ $RECYCLE.BIN/
 
 #User Specific Files
 *.atsuo
+*.atsln
 
 # Project Files
 *.cproj
 
 # Solution Files
-*.atsln
 *.componentinfo.xml
 
 # End of https://www.gitignore.io/api/atmelstudio

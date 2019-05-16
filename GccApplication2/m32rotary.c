@@ -28,8 +28,8 @@ void MainScreenUpdate(void) // main loop constantly calls this function to keep 
 			_delay_us(80);
 			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree); //Cursor @ beginning of line 3
 			_delay_us(80);
-			if (counterdc - 10 <= 0) //Negative wrap around to 100%
-				counterdc = 100;
+			if (counterdc - 10 < 0) //Negative wrap around to 100%
+				counterdc = 0;
 			else
 				counterdc -= 10;
 			itoa(counterdc, counterstring, 10); //Store the new value in counterstring
@@ -49,7 +49,7 @@ void MainScreenUpdate(void) // main loop constantly calls this function to keep 
 			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineThree); //Cursor @ beginning of line 3
 			_delay_us(80);
 			if (counterdc + 10 >= 100) //Positive wrap around to 0%
-				counterdc = 0;
+				counterdc = 100;
 			else
 				counterdc += 10;
 			itoa(counterdc, counterstring, 10); //Store the new value in counterstring
@@ -81,11 +81,13 @@ void MainScreenUpdate(void) // main loop constantly calls this function to keep 
 			_delay_us(80);
 			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo); //Cursor @ beginning of line 2
 			_delay_us(80);
-			if (counterfreq - 1 <= 0) //Negative wrap around to 100Hz
+			if (counterfreq - 0.1 <= 0) //Negative wrap around to 100Hz
 				counterfreq = 100;
 			else{
-				counterfreq -= 1;
+				counterfreq -= 0.1;
 			}
+			Freq_change(counterfreq,0);
+			_delay_us(80);
 			dtostrf(counterfreq,3,1, counterstring); //Store the new value in counterstring
 			lcd_write_string_4d("Frequentie: ");
 			lcd_write_string_4d(counterstring); //print on lcd
@@ -102,12 +104,13 @@ void MainScreenUpdate(void) // main loop constantly calls this function to keep 
 			_delay_us(80);
 			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineTwo); //Cursor @ beginning of line 3
 			_delay_us(80);
-			if (counterfreq + 1 >= 100) //Positive wrap around to 0%
-				counterfreq = 0;
+			if (counterfreq + 0.1 >= 100) //Positive wrap around to 0%
+				counterfreq = 100;
 			else{
-				counterfreq += 1;
+				counterfreq += 0.1;
 			}
-			//Freq_change(counterfreq);
+			Freq_change(counterfreq,0);
+			_delay_us(80);
 			dtostrf(counterfreq,3,1, counterstring); //Store the new value in counterstring
 			lcd_write_string_4d("Frequentie: ");
 			lcd_write_string_4d(counterstring); //print on lcd
@@ -139,8 +142,8 @@ void MainScreenUpdate(void) // main loop constantly calls this function to keep 
 			_delay_us(80);
 			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne); //Cursor @ beginning of line 3
 			_delay_us(80);
-			if (counteramp - 10 <= 0) //Negative wrap around to 100
-				counteramp = 100;
+			if (counteramp - 10 < 0) //Negative wrap around to 100
+				counteramp = 0;
 			else{
 				counteramp -= 10;
 			}
@@ -162,7 +165,7 @@ void MainScreenUpdate(void) // main loop constantly calls this function to keep 
 			lcd_write_instruction_4d(lcd_SetCursor | lcd_LineOne); //Cursor @ beginning of line 3
 			_delay_us(80);
 			if (counteramp + 10 >= 100) //Positive wrap around to 0%
-				counteramp = 0;
+				counteramp = 100;
 			else{
 				counteramp += 10;
 			}

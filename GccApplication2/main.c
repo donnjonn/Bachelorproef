@@ -4,7 +4,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-//#define F_CPU 16000000
 uint8_t countInterrupt;
 
 void ExtIntInit(void)
@@ -21,11 +20,6 @@ void Timer2_Init(void)
 	TCNT2=0x00; //startvalue 0
 	TCCR2B|=(1<<CS22)|(1<<CS21)|(1<<CS20); //prescaler 256 ~122 interrupts/s (genoeg voor rotary encoder)
 	TIMSK2|=(1<<TOIE2);//Enable Timer2 Overflow interrupts ==> TIMER2_OVF_vect
-}
-
-void Timer2_Start(void)
-{
-	
 }
 
 void timer1_init(double tijd)
@@ -70,17 +64,17 @@ void LcdInit(void)
 
 void MainInit(void)
 {
-	DDRB = 0xFF; //all B-pins set as output
+	//DDRB = 0xFF; //all B-pins set as output
 	LcdInit(); //Init lcd display
 	//Init functions
 	RotaryInit(); //init rotary encoders
 	Timer2_Init(); //init timer2 for rotary encoder interrupts
-		//Timer2_Start(); <== niet meer nodig
 	ExtIntInit(); //Init external interrupts
-	//SPI_init();
-	//AD9833_init();
+	SPI_init();
+	AD9833_init();
 	sei(); //Enable interrupts
 	setPWM(50);//set amplitude pwm to 50%
+	Freq_change(75.0,0);
 }
 int main(void)
 {
