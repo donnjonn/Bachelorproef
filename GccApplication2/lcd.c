@@ -25,29 +25,29 @@ Change this to the right connections!
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-#define lcd_D7_port     PORTD                   // lcd Data 7 connection
-#define lcd_D7_bit      PORTD7
-#define lcd_D7_ddr      DDRD
+#define lcd_D7_port     PORTC                   // lcd Data 7 connection
+#define lcd_D7_bit      PORTC5
+#define lcd_D7_ddr      DDRC
 
-#define lcd_D6_port     PORTD                   // lcd Data 6 connection
-#define lcd_D6_bit      PORTD3
-#define lcd_D6_ddr      DDRD
+#define lcd_D6_port     PORTC                   // lcd Data 6 connection
+#define lcd_D6_bit      PORTC4
+#define lcd_D6_ddr      DDRC
 
-#define lcd_D5_port     PORTD                   // lcd Data 5 connection
-#define lcd_D5_bit      PORTD5
-#define lcd_D5_ddr      DDRD
+#define lcd_D5_port     PORTC                   // lcd Data 5 connection
+#define lcd_D5_bit      PORTC3
+#define lcd_D5_ddr      DDRC
 
-#define lcd_D4_port     PORTD                   // lcd Data 4 connection
-#define lcd_D4_bit      PORTD4
-#define lcd_D4_ddr      DDRD
+#define lcd_D4_port     PORTC                   // lcd Data 4 connection
+#define lcd_D4_bit      PORTC2
+#define lcd_D4_ddr      DDRC
 
-#define lcd_E_port      PORTB                   // lcd Enable pin
-#define lcd_E_bit       PORTB1					// D9
-#define lcd_E_ddr       DDRB
+#define lcd_E_port      PORTC                   // lcd Enable pin
+#define lcd_E_bit       PORTC1					// D9
+#define lcd_E_ddr       DDRC
 
-#define lcd_RS_port     PORTB                   // lcd Register Select pin
-#define lcd_RS_bit      PORTB0					// D8
-#define lcd_RS_ddr      DDRB
+#define lcd_RS_port     PORTC                   // lcd Register Select pin
+#define lcd_RS_bit      PORTC0					// D8
+#define lcd_RS_ddr      DDRC
 
 #define lcd_LineOne     0x00                    // startlocation of line 1
 #define lcd_LineTwo     0x40                    // startlocation of line 2

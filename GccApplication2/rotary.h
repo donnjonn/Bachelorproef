@@ -1,13 +1,13 @@
 #define ROTARY_H
 #include <avr/io.h>
 //define port where encoder is connected
-#define ROTPORT PORTC
-#define ROTDDR DDRC
-#define ROTPIN PINC
+#define ROTPORT PORTD
+#define ROTDDR DDRD
+#define ROTPIN PIND
 //define rotary encoder pins
-#define ROTPA PC0
-#define ROTPB PC1
-#define ROTPBUTTON	PC2
+#define ROTPA PD3
+#define ROTPB PD4
+#define ROTPBUTTON PD5
 //define macros to check status
 #define ROTA !((1<<ROTPA)&ROTPIN)
 #define ROTB !((1<<ROTPB)&ROTPIN)

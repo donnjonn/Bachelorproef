@@ -43,7 +43,7 @@ Input:    unsigned short freq_out = frequency, unsigned int select = register 0 
 Returns:  none
 Comment:  uses 14 bit filter and adds control words, 
 **************************************************************************/
-extern void Freq_change ( unsigned short freq_out, unsigned int select );
+extern void Freq_change ( double freq_out, unsigned int select );
 
 
 /*************************************************************************

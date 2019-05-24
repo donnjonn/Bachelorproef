@@ -56,7 +56,7 @@ Input:    unsigned short freq_out = frequency, unsigned int select = register 0 
 Returns:  none
 Comment:  uses 14 bit filter and adds control words, 
 **************************************************************************/
-void Freq_change ( unsigned short freq_out, unsigned int select )  // take base10 frequency and do frequency hop
+void Freq_change ( double freq_out, unsigned int select )  // take base10 frequency and do frequency hop
 {
 	unsigned long freq_reg = freq_out * 65.536; 	// make freq register from frequency // set for 4 MHz Mclk
 	unsigned short MS_reg = ((freq_reg>>14) & 0x3FFF);  // filter out MS -- make 2 x 14 bit frequency words
@@ -72,7 +72,24 @@ void Freq_change ( unsigned short freq_out, unsigned int select )  // take base1
 	SPI_write16(LS_reg);								// send the LS word first, to the ad9833
 	SPI_write16(MS_reg);								// send the MS word last,  to the ad9833
 }
+/*
+void Phase_change ( double phase_out, unsigned int select )  // take base10 phase and do phase hop
+{
+	unsigned long phase_reg = phase_out * 65.536; 	// make freq register from frequency // set for 4 MHz Mclk
+	unsigned short MS_reg = ((phase_reg>>14) & 0x3FFF);  // filter out MS -- make 2 x 14 bit frequency words
+	unsigned short LS_reg = (phase_reg & 0x3FFF);		// filter out LS -- make 2 x 14 bit frequency words
 
+	MS_reg += 0x4000; 									// add control bits hex = 0x4000
+	LS_reg += 0x4000; 									// add control bits hex = 0x4000
+
+	if (select == 0 ) { SPI_write16(0x2000);}			// prep ad9833 to receive full 28bit word for freq 0
+	if (select == 1 ) { SPI_write16(0x2800);}			// prep ad9833 to receive full 28bit word for freq 1
+	SPI_write16(0x2028);
+
+	SPI_write16(LS_reg);								// send the LS word first, to the ad9833
+	SPI_write16(MS_reg);								// send the MS word last,  to the ad9833
+}
+*/
 
 /*************************************************************************
 Function: AD9833_init()
